@@ -1,0 +1,2 @@
+# ccskicomp
+School project
