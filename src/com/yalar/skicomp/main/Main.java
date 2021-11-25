@@ -7,6 +7,7 @@ public class Main {
 		System.out.println("Svejsan");
 		System.out.println("Gud va gott med en mosbricka!");
 
+		System.out.println("Laxen dansade uppför strömmen på en tisdagkväll");
 	}
 
 }
