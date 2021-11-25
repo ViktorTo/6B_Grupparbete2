@@ -1,2 +1,2 @@
-# ccskicomp
+# Längdskidåkningstävling
 School project
