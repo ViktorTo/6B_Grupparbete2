@@ -7,6 +7,7 @@ public class Main {
 		System.out.println("Svejsan");
 		// *Testar Git*
 		System.out.println("Git fungerar nu.");
+		// *lägger till branch*
 	}
 
 }
