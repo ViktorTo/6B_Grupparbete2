@@ -37,4 +37,11 @@ public class Person {
 		Country = country;
 	}
 
+	@Override
+	public String toString() {
+		return "[firstName=" + firstName + ", lastName=" + lastName + ", Country=" + Country + "]";
+	}
+	
+	
+
 }
