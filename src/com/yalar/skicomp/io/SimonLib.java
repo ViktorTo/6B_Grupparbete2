@@ -1,4 +1,4 @@
-package com.yalar.skicomp.main;
+package com.yalar.skicomp.io;
 
 import java.util.Iterator;
 import java.util.Scanner;
@@ -29,7 +29,7 @@ public class SimonLib {
             try {
                 num = Double.parseDouble(s);
             } catch (Exception e) {
-                System.out.println("Only enter integers!");
+                System.out.println("Only enter doubles!");
                 num = -1;
             }
         }
@@ -56,7 +56,7 @@ public class SimonLib {
 					}
 				}
             } catch (Exception e) {
-                System.out.println("Only enter integers!");
+                System.out.println("Only enter strings with letters in them!");
                 num = -1;
             }
         }
