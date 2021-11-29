@@ -10,6 +10,7 @@ public class Main {
 		// *Testar Git*
 		System.out.println("Git fungerar nu.");
 		// *l√§gger till branch*
+		System.out.println("PUSH IT TO DA LIMITZ!!!1!1!!§");
 	}
 
 }
