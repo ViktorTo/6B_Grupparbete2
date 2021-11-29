@@ -1,6 +1,6 @@
 package com.yalar.skicomp.participant;
 
-import com.yajava.skicomp.stopwatch.StopWatch;
+import com.yalar.skicomp.stopwatch.StopWatch;
 
 public class Participant implements Comparable<Participant> {
 

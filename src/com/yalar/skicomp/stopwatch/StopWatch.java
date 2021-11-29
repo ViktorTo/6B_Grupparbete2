@@ -1,4 +1,4 @@
-package com.yajava.skicomp.stopwatch;
+package com.yalar.skicomp.stopwatch;
 
 import java.time.Duration;
 import java.time.LocalTime;
@@ -45,9 +45,9 @@ public class StopWatch implements Comparable<StopWatch>{
 		for (int i = 0; i < intervalls.length; i++) {
 			if (intervalls[i] != null) {
 				Duration dur = Duration.between(start, intervalls[i]);
-				long HH = dur.toHours();
-				long MM = dur.toMinutes();
-				long SS = dur.toSeconds();
+				long HH = dur.toHoursPart();
+				long MM = dur.toMinutesPart();
+				long SS = dur.toSecondsPart();
 				long MS = dur.toMillisPart();
 				str += String.format("%02d:%02d:%02d:%02d", HH, MM, SS, MS) + "\n";
 			}
