@@ -1,4 +1,4 @@
-package com.yalar.skicomp.main;
+package com.yalar.skicomp.io;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

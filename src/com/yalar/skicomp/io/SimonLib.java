@@ -1,4 +1,4 @@
-package com.yalar.skicomp.main;
+package com.yalar.skicomp.io;
 
 import java.util.Iterator;
 import java.util.Scanner;
