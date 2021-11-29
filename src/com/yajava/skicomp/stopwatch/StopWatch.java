@@ -3,11 +3,12 @@ package com.yajava.skicomp.stopwatch;
 import java.time.Duration;
 import java.time.LocalTime;
 
-public class StopWatch {
+public class StopWatch implements Comparable<StopWatch>{
 	
 	private LocalTime start;
 	private LocalTime end;
 	private LocalTime[] intervalls = new LocalTime[10];
+	private Duration totalTime;
 	
 	public StopWatch() {
 		
@@ -64,13 +65,19 @@ public class StopWatch {
 	public String getDuration() {
 		LocalTime temp;
 		temp = (end == null) ? LocalTime.now() : end;
-		Duration dur = Duration.between(start, temp);
-		long HH = dur.toHours();
-		long MM = dur.toMinutesPart();
-		long SS = dur.toSecondsPart();
+		totalTime = Duration.between(start, temp);
+		long HH = totalTime.toHours();
+		long MM = totalTime.toMinutesPart();
+		long SS = totalTime.toSecondsPart();
 		String timeBetween = String.format("%02d:%02d:%02d", HH, MM, SS);
 		temp = null;
 		return timeBetween;
+	}
+ 
+	@Override
+	public int compareTo(StopWatch o) {
+		return this.totalTime.compareTo(o.totalTime);
+		
 	}
 
 }
