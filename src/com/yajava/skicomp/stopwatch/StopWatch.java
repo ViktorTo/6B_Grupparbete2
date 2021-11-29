@@ -28,6 +28,7 @@ public class StopWatch implements Comparable<StopWatch>{
 	
 	public void endClock() {
 		this.end = LocalTime.now();
+		totalTime = Duration.between(this.start, this.end);
 	}
 	
 	public void setIntervall() {
