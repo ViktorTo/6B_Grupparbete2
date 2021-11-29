@@ -1,8 +1,8 @@
-package com.yajava.skicomp.participant;
+package com.yalar.skicomp.participant;
 
 import com.yajava.skicomp.stopwatch.StopWatch;
 
-public class Participant {
+public class Participant implements Comparable<Participant> {
 
 	private int participantNum;
 	private Person participant;
@@ -33,9 +33,14 @@ public class Participant {
 	}
 	@Override
 	public String toString() {
-		return "[participantNum= " + participantNum + ", participant= " + participant + ", StopWatch= " + sw + "]";
+		return participant + ", StopWatch= " + sw;
 	}
-	
+	@Override
+	public int compareTo(Participant o) {
+		
+		return sw.compareTo(o.getStopWatch());
+		
+	}
 	
 	
 	

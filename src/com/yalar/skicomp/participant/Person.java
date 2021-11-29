@@ -1,4 +1,4 @@
-package com.yajava.skicomp.participant;
+package com.yalar.skicomp.participant;
 
 public class Person {
 
@@ -39,9 +39,7 @@ public class Person {
 
 	@Override
 	public String toString() {
-		return "[firstName=" + firstName + ", lastName=" + lastName + ", Country=" + Country + "]";
+		return firstName + " " + lastName + ", " + Country + " - ";
 	}
-	
-	
 
 }
