@@ -48,7 +48,8 @@ public class StopWatch implements Comparable<StopWatch>{
 				long HH = dur.toHours();
 				long MM = dur.toMinutes();
 				long SS = dur.toSeconds();
-				str += String.format("%02d:%02d:%02d", HH, MM, SS) + "\n";
+				long MS = dur.toMillisPart();
+				str += String.format("%02d:%02d:%02d:%02d", HH, MM, SS, MS) + "\n";
 			}
 		}
 		return str;
@@ -70,7 +71,8 @@ public class StopWatch implements Comparable<StopWatch>{
 		long HH = totalTime.toHours();
 		long MM = totalTime.toMinutesPart();
 		long SS = totalTime.toSecondsPart();
-		String timeBetween = String.format("%02d:%02d:%02d", HH, MM, SS);
+		long MS = totalTime.toMillisPart();
+		String timeBetween = String.format("%02d:%02d:%02d:%02d", HH, MM, SS, MS);
 		temp = null;
 		return timeBetween;
 	}
