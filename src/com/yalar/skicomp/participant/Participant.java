@@ -2,17 +2,18 @@ package com.yalar.skicomp.participant;
 
 import com.yalar.skicomp.stopwatch.StopWatch;
 
-public class Participant implements Comparable<Participant> {
+public class Participant extends Person implements Comparable<Participant> {
 
-	private int participantNum;
-	private Person participant;
+	// Private instance variables for each participant.
+	private int participantNum = 1;
 	private StopWatch sw;
 	
 	
-	public Participant(int participantNum, Person participant) {
-		super();
-		this.participantNum = participantNum;
-		this.participant = participant;
+	
+	
+	
+	public Participant(String firstName, String lastName, String country) {
+		super(firstName, lastName, country);
 		this.sw = new StopWatch();
 	}
 	public int getParticipantNum() {
@@ -21,20 +22,21 @@ public class Participant implements Comparable<Participant> {
 	public void setParticipantNum(int participantNum) {
 		this.participantNum = participantNum;
 	}
-	public Person getParticipant() {
-		return participant;
-	}
-	public void setParticipant(Person participant) {
-		this.participant = participant;
-	} 
+	
 	
 	public StopWatch getStopWatch() {
 		return sw;
 	}
+	
+	
+	
+	
+	
 	@Override
 	public String toString() {
-		return participant + ", StopWatch= " + sw;
+		return "Participant "+ participantNum + super.toString() + ", " + " " + sw;
 	}
+	// A compareTo method that uses the StopWatch to get the time.
 	@Override
 	public int compareTo(Participant o) {
 		
