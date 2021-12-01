@@ -3,34 +3,46 @@ package com.yalar.skicomp.stopwatch;
 import java.time.Duration;
 import java.time.LocalTime;
 
-public class StopWatch implements Comparable<StopWatch>{
-	
+/**
+ * 
+ * @author Viktor Tornberg
+ *
+ */
+
+public class StopWatch implements Comparable<StopWatch> {
+
 	private LocalTime start;
 	private LocalTime end;
 	private LocalTime[] intervalls = new LocalTime[10];
 	private Duration totalTime;
-	
+
 	public StopWatch() {
-		
+
 	}
 	
+	public void setStart(LocalTime start) {
+		this.start = start;
+	}
+
 	public LocalTime getStart() {
 		return this.start;
 	}
-	
+
 	public LocalTime getEnd() {
 		return this.end;
 	}
-	
+
 	public void startClock() {
 		this.start = LocalTime.now();
 	}
-	
+
 	public void endClock() {
 		this.end = LocalTime.now();
-		totalTime = Duration.between(this.start, this.end);
+		if (this.start != null) {
+			totalTime = Duration.between(this.start, this.end);
+		}
 	}
-	
+
 	public void setIntervall() {
 		for (int i = 0; i < intervalls.length; i++) {
 			if (this.intervalls[i] == null) {
@@ -39,7 +51,7 @@ public class StopWatch implements Comparable<StopWatch>{
 			}
 		}
 	}
-	
+
 	public String getIntervall() {
 		String str = "";
 		for (int i = 0; i < intervalls.length; i++) {
@@ -54,16 +66,12 @@ public class StopWatch implements Comparable<StopWatch>{
 		}
 		return str;
 	}
-	
-	@Override
-	public String toString() {
-		return "Stopwatch [start = " + start + ", end = " + end + "]";
-	}
-	
-	//Method that returns string with the time from start to end or start to now.
-	//Checks to see if end has value, if not create new Localtime.now and calculates time between.
+
+	// Method that returns string with the time from start to end or start to now.
+	// Checks to see if end has value, if not create new Localtime.now and
+	// calculates time between.
 	// if end has value, calculates time between start and end.
-	
+
 	public String getDuration() {
 		LocalTime temp;
 		temp = (end == null) ? LocalTime.now() : end;
@@ -76,13 +84,18 @@ public class StopWatch implements Comparable<StopWatch>{
 		temp = null;
 		return timeBetween;
 	}
- 
+
+	// Uses Durations compareTo-method
+
 	@Override
 	public int compareTo(StopWatch o) {
 		return this.totalTime.compareTo(o.totalTime);
-		
+
+	}
+
+	@Override
+	public String toString() {
+		return "Stopwatch [Start:" + start + ", End:" + end + "]";
 	}
 
 }
-
-
