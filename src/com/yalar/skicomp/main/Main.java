@@ -5,12 +5,8 @@ import java.util.Scanner;
 public class Main {
 
 	public static void main(String[] args) {
-		System.out.println("Hejsan");
-		System.out.println("Svejsan");
-		// *Testar Git*
-		System.out.println("Git fungerar nu.");
-		// *l√§gger till branch*
-		System.out.println("PUSH IT TO DA LIMITZ!!!1!1!!§");
+		Gameloop g = new Gameloop();
+		g.start();
 	}
 
 }
