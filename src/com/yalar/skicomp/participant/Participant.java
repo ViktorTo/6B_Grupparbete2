@@ -8,11 +8,6 @@ import com.yalar.skicomp.stopwatch.StopWatch;
 
 public class Participant extends Person implements Comparable<Participant> {
 
-//	
-//	private static Random random = null;
-//	
-//	int min = 1;
-	int max = 4;
 
 	// Private instance variables for each participant.
 	private int participantNumber;
@@ -34,38 +29,30 @@ public class Participant extends Person implements Comparable<Participant> {
 	}
 
 	public static Participant[] setParticipantNum(Participant[] participants) {
-//		while (rnd.size() < participants.length) {
-//
-//			/*
-//			 * The add() method of a Set is a boolean and if it returns true, then this
-//			 * element is not inside the Set yet and will be added to it, if it returns
-//			 * false, the element already exists and it will not be added to the Set again
-//			 */
-//			rnd.add((int) (Math.random() * 100));
-//		}
 
-		// Array för att spara slumpade nummer.
+
+		// Array fÃ¶r att spara slumpade nummer.
 
 		int[] nums = new int[participants.length];
 
-		//Yttre loop för att kolla placering i participant array
+		//Yttre loop fÃ¶r att kolla placering i participant array
 
 		for (int i = 0; i < participants.length; i++) {
 
 			boolean cont = true;
-			// while loop ifall vi behöver slumpa ett nytt nummer på samma plats i arrayen
+			// while loop ifall vi behï¿½ver slumpa ett nytt nummer pï¿½ samma plats i arrayen
 			while(cont) {
 				nums[i] = (int) (Math.random() * 100);
 				
 				cont = false;
-				//For loop för att jämföra de två arrayerna ifall vi hittar ett tal som är lika.
+				//For loop fÃ¥r att jï¿½mfï¿½ra de tvÃ¥ arrayerna ifall vi hittar ett tal som Ã¤r lika.
 				for(int j = 0; j < participants.length; j++) {
-					// om samma nummer inträffar kör vi while loopen igen.
+					// om samma nummer intrÃ¤ffar sÃ¥ kÃ¶rs loopen igen.
 
 					if(participants[j].getParticipantNumber() == nums[i]) {
 						j = participants.length;
 						cont = true;
-						// om talet i participants är noll, så avslutas kontrollen.
+						// om talet i participants Ã¤r noll, sÃ¥ avslutas kontrollen.
 					} else if (participants[j].getParticipantNumber() == 0) {
 						j = participants.length;
 					}
@@ -73,7 +60,7 @@ public class Participant extends Person implements Comparable<Participant> {
 			}
 
 
-			//Nummer förs in på index av deltagare.
+			//Nummer fÃ¶rs in pÃ¥ index av deltagare.
 			participants[i].setParticipantNumber(nums[i]);
 
 
@@ -90,7 +77,7 @@ public class Participant extends Person implements Comparable<Participant> {
 
 	@Override
 	public String toString() {
-		return "Participant " + participantNumber + " " + super.toString() + ", " + " " + sw;
+		return "Participant " + participantNumber + " " + super.toString()  + sw;
 	}
 
 	// A compareTo method that uses the StopWatch to get the time.
