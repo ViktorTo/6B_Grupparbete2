@@ -96,11 +96,11 @@ public class StopWatch implements Comparable<StopWatch> {
 	@Override
 	public String toString() {
 		if(start == null) {
-			return "Stopwatch [Start:" + "00:00:00" + ", End:" + "00:00:00" + "]";
+			return "Stopwatch [Start: " + "00:00:00" + " - End: " + "00:00:00" + "]";
 		}else if(end == null) {
-			return "Stopwatch [Start:" + start + ", End:" + "00:00:00" + "]";
+			return "Stopwatch [Start: " + start + " - End: " + "00:00:00" + "]";
 		}
-		return "Stopwatch [Start:" + start + ", End:" + end + "]";
+		return "Stopwatch [Start: " + start + " - End: " + end + "]";
 	}
 
 }
