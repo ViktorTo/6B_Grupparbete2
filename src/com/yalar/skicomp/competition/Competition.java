@@ -1,6 +1,7 @@
 package com.yalar.skicomp.competition;
 
 import java.time.Duration;
+import java.util.Arrays;
 
 import com.yalar.skicomp.participant.Participant;
 import com.yalar.skicomp.stopwatch.StopWatch;
@@ -36,6 +37,10 @@ public class Competition {
 
 	public void endSkierTime(Participant skier) {
 		skier.getStopWatch().endClock();
+	}
+
+	public void sortResults() {
+		Arrays.sort(this.skiers);
 	}
 
 	public String getDuration(Participant skier) {
