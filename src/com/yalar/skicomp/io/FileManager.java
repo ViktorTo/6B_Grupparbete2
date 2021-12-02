@@ -39,7 +39,15 @@ public class FileManager {
 		}
 		return file;
 	}
-	
+
+	public boolean doesExist(String path) {
+		File f = new File(path);
+		if (f.exists()) {
+			return true;
+		}
+		return false;
+	}
+
 	public boolean deleteFile(String path) {
 		File file = new File(path);
 		if (file.exists()) {
@@ -47,40 +55,30 @@ public class FileManager {
 		}
 		return false;
 	}
-	
-	public boolean saveFile(ArrayList<String> file, String path, boolean overwrite) {
+
+	public boolean saveFile(ArrayList<String> file, String path) {
 		try {
-			File f = new File(path);
-			if (f.exists() && overwrite) {
-				// Creates a FileWriter
-			      FileWriter fp = new FileWriter(path);
-			      
+			// Creates a FileWriter
+			FileWriter fp = new FileWriter(path);
 
-			      // Creates a BufferedWriter
-			      BufferedWriter output = new BufferedWriter(fp);
 
-			      // Writes the string to the file
-			      
-			      for (Iterator<String> iterator = file.iterator(); iterator.hasNext();) {
-					String line = (String) iterator.next();
-					 output.write(line);
-				}
-			      
-			      // Closes the writer
-			      output.close();
-			    } else {
-			    	System.out.println("File already exists!");
-			    	return true;
-			    }
-			
+			// Creates a BufferedWriter
+			BufferedWriter output = new BufferedWriter(fp);
 
+			// Writes the string to the file
+
+			for (Iterator<String> iterator = file.iterator(); iterator.hasNext();) {
+				String line = (String) iterator.next();
+				output.write(line);
 			}
-			
-		      
-		    catch (Exception e) {
-		      e.getStackTrace();
-		      return true;
-		    }
+
+			// Closes the writer
+			output.close();
+		}
+		catch (Exception e) {
+			e.getStackTrace();
+			return true;
+		}
 		return false;
 	}
 }
