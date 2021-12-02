@@ -2,15 +2,17 @@ package com.yalar.skicomp.main;
 
 import java.util.Scanner;
 
+import com.yalar.skicomp.io.SimonLib;
+
 public class Gameloop {
-	Scanner scan;
+	SimonLib input;
 	
 	public Gameloop() {
-		//scan = Scanner(System.in);
+		input = new SimonLib();
 	}
 	
 	public void start() {
-		//intInput(scan);
+		SimonLib.intInput();
 		//TODO: Implement the loop.
 	}
 }
