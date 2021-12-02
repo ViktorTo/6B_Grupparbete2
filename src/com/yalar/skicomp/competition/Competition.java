@@ -1,7 +1,9 @@
 package com.yalar.skicomp.competition;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 
 import com.yalar.skicomp.participant.Participant;
 import com.yalar.skicomp.stopwatch.StopWatch;
@@ -41,6 +43,18 @@ public class Competition {
 
 	public void sortResults() {
 		Arrays.sort(this.skiers);
+	}
+	
+	public ArrayList<String> getArraylist() {
+		
+		ArrayList<String> a1 = new ArrayList<String>();
+		
+		for (int i = 0; i < skiers.length; i++) {
+			a1.add(skiers[i].toString() + " " + skiers[i].getStopWatch().getDuration());
+		}
+		
+		return a1;
+		
 	}
 
 	public String getDuration(Participant skier) {

@@ -48,7 +48,8 @@ public class IndStart extends Competition {
 		for (int j = 0; j < skiers.length; j++) {
 
 			skiers[j].getStopWatch().startClock();
-
+			System.out.println(skiers[j].getFirstName() + skiers[j].getParticipantNumber() + " is starting");
+			
 			try {
 				Thread.sleep(i * 1000);
 			} catch (InterruptedException e) {
