@@ -23,7 +23,6 @@ public class Participant extends Person implements Comparable<Participant> {
 		this.participantNum = participantNum;
 	}
 	
-	
 	public StopWatch getStopWatch() {
 		return sw;
 	}
