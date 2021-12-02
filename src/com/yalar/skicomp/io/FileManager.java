@@ -2,6 +2,7 @@ package com.yalar.skicomp.io;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -39,25 +40,35 @@ public class FileManager {
 		return file;
 	}
 	
-	public boolean saveFile(ArrayList<String> file, String path) {
+	public boolean saveFile(ArrayList<String> file, String path, boolean overwrite) {
 		try {
-		      // Creates a FileWriter
-		      FileWriter fp = new FileWriter(path);
+			File f = new File(path);
+			if (f.exists() && overwrite) {
+				// Creates a FileWriter
+			      FileWriter fp = new FileWriter(path);
+			      
 
-		      // Creates a BufferedWriter
-		      BufferedWriter output = new BufferedWriter(fp);
+			      // Creates a BufferedWriter
+			      BufferedWriter output = new BufferedWriter(fp);
 
-		      // Writes the string to the file
-		      
-		      for (Iterator<String> iterator = file.iterator(); iterator.hasNext();) {
-				String line = (String) iterator.next();
-				 output.write(line);
+			      // Writes the string to the file
+			      
+			      for (Iterator<String> iterator = file.iterator(); iterator.hasNext();) {
+					String line = (String) iterator.next();
+					 output.write(line);
+				}
+			      
+			      // Closes the writer
+			      output.close();
+			    } else {
+			    	System.out.println("File already exists!");
+			    	return true;
+			    }
+			
+
 			}
+			
 		      
-		      // Closes the writer
-		      output.close();
-		    }
-
 		    catch (Exception e) {
 		      e.getStackTrace();
 		      return true;
