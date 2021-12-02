@@ -1,6 +1,5 @@
 package com.yalar.skicomp.io;
 
-import java.util.Iterator;
 import java.util.Scanner;
 
 public class SimonLib {
