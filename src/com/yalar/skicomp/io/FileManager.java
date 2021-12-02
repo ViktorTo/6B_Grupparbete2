@@ -40,6 +40,14 @@ public class FileManager {
 		return file;
 	}
 	
+	public boolean deleteFile(String path) {
+		File file = new File(path);
+		if (file.exists()) {
+			return file.delete();
+		}
+		return false;
+	}
+	
 	public boolean saveFile(ArrayList<String> file, String path, boolean overwrite) {
 		try {
 			File f = new File(path);
