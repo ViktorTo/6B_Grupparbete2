@@ -44,27 +44,32 @@ public class Competition {
 	public void sortResults() {
 		Arrays.sort(this.skiers);
 	}
-	
+
 	public ArrayList<String> getArraylist() {
-		
+
 		ArrayList<String> a1 = new ArrayList<String>();
-		
+
 		for (int i = 0; i < skiers.length; i++) {
 			a1.add(skiers[i].toString() + " " + skiers[i].getStopWatch().getDuration());
 		}
-		
+
 		return a1;
-		
+
 	}
 
 	public String getDuration(Participant skier) {
 
-		Duration dur = Duration.between(this.sw.getStart(), skier.getStopWatch().getEnd());
-		long HH = dur.toHoursPart();
-		long MM = dur.toMinutesPart();
-		long SS = dur.toSecondsPart();
-		long MS = dur.toMillisPart();
-		return String.format("%02d:%02d:%02d:%02d", HH, MM, SS, MS);
+		if (skier.getStopWatch().getEnd() != null) {
+
+			Duration dur = Duration.between(this.sw.getStart(), skier.getStopWatch().getEnd());
+			long HH = dur.toHoursPart();
+			long MM = dur.toMinutesPart();
+			long SS = dur.toSecondsPart();
+			long MS = dur.toMillisPart();
+			return String.format("%02d:%02d:%02d:%02d", HH, MM, SS, MS);
+		}
+
+		return "Skier have not finished";
 
 	}
 
