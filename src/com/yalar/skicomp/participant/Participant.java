@@ -1,8 +1,6 @@
 package com.yalar.skicomp.participant;
 
 
-import java.util.Random;
-
 
 import com.yalar.skicomp.stopwatch.StopWatch;
 
