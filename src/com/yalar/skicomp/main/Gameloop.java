@@ -13,7 +13,11 @@ public class Gameloop {
 		input = new SimonLib();
 		done = false;
 	}
-
+	
+	IndStart is1;	// Individual Start
+	Masstart ms1;	// MassStart
+	Sprint spr1;	// Sprint
+	
 	public void intro() {
 		System.out.println("Welcome to YAJava Skiing Competition!\n" + "Your options are as follows:\n\n"
 				+ "1. Start A Competition\n"
@@ -36,11 +40,11 @@ public class Gameloop {
 		switch(option) {
 		case 1:
 			System.out.println();
-			IndStart is1 = new IndStart(8, SimonLib.intInput(), null);
+			is1 = new IndStart(8, SimonLib.intInput(), null);
 		case 2:
-			Masstart ms1 = new Masstart(8, 7, null);
+			ms1 = new Masstart(8, 7, null);
 		case 3:
-			Sprint spr1 = new Sprint(8,7,null);
+			spr1 = new Sprint(8,7,null);
 		}
 		
 	}
