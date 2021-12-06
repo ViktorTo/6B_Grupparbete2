@@ -34,41 +34,13 @@ public class IndStart extends Competition {
 	public void setNumOfParticipants(int numOfParticipants) {
 		this.numOfParticipants = numOfParticipants;
 	}
-	
+
 	public Participant[] getSkierList() {
 		return this.getSkiers();
 	}
 
 	public void startSkierTime(Participant skier) {
 		skier.getStopWatch().startClock();
-	}
-
-	public void startSkierIntervall(Participant[] skiers, int i) {
-
-		for (int j = 0; j < skiers.length; j++) {
-
-			skiers[j].getStopWatch().startClock();
-			System.out.println(skiers[j].getFirstName() + skiers[j].getParticipantNumber() + " is starting");
-			
-			try {
-				Thread.sleep(i * 1000);
-			} catch (InterruptedException e) {
-
-				e.printStackTrace();
-			}
-
-		}
-
-	}
-
-	public void endSkierTime(Participant skier) {
-		skier.getStopWatch().endClock();
-	}
-
-	public String getDuration(Participant skier) {
-
-		return skier.getStopWatch().getDuration();
-
 	}
 
 }
