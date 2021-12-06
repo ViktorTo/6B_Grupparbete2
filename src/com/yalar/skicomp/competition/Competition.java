@@ -3,12 +3,11 @@ package com.yalar.skicomp.competition;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 
 import com.yalar.skicomp.participant.Participant;
 import com.yalar.skicomp.stopwatch.StopWatch;
 
-public class Competition {
+public abstract class Competition {
 
 	private Participant[] skiers;
 	private StopWatch sw = new StopWatch();
@@ -24,9 +23,6 @@ public class Competition {
 	public void startComp() {
 		sw.startClock();
 
-		for (int i = 0; i < skiers.length; i++) {
-			skiers[i].getStopWatch().setStart(sw.getStart());
-		}
 	}
 
 	public void endComp() {
@@ -54,6 +50,46 @@ public class Competition {
 		}
 
 		return a1;
+
+	}
+
+	/**
+	 * Method that starts all skiers. The start time will be the same for all skiers
+	 * in the array.
+	 * 
+	 * @param skiers
+	 */
+
+	public void startAllSkiers(Participant[] skiers) {
+
+		for (int i = 0; i < skiers.length; i++) {
+			skiers[i].getStopWatch().setStart(sw.getStart());
+		}
+
+	}
+
+	/**
+	 * Method for induvidual start. Skiers will start with intervals, i is seconds.
+	 * 
+	 * @param skiers
+	 * @param i
+	 */
+
+	public void startSkierIntervall(Participant[] skiers, int i) {
+
+		for (int j = 0; j < skiers.length; j++) {
+
+			skiers[j].getStopWatch().startClock();
+			System.out.println(skiers[j].getFirstName() + skiers[j].getParticipantNumber() + " is starting");
+
+			try {
+				Thread.sleep(i * 1000);
+			} catch (InterruptedException e) {
+
+				e.printStackTrace();
+			}
+
+		}
 
 	}
 

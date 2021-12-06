@@ -30,28 +30,6 @@ public class StopWatch implements Comparable<StopWatch> {
 		return this.start;
 	}
 
-	public String getStartToString() {
-		LocalTime lt = LocalTime.MIDNIGHT;
-		Duration dur = Duration.between(lt, start);
-		long HH = dur.toHoursPart();
-		long MM = dur.toMinutesPart();
-		long SS = dur.toSecondsPart();
-		long MS = dur.toMillisPart();
-		return String.format("%02d:%02d:%02d:%02d", HH, MM, SS, MS);
-	}
-	
-	public String getLatestInt() {
-		if(latestInt != null) {
-			long HH = latestInt.toHoursPart();
-			long MM = latestInt.toMinutesPart();
-			long SS = latestInt.toSecondsPart();
-			long MS = latestInt.toMillisPart();
-			return String.format("%02d:%02d:%02d:%02d", HH, MM, SS, MS);
-		}else {
-			return "No time found";
-		}
-	}
-
 	public LocalTime getEnd() {
 		return this.end;
 	}
@@ -67,6 +45,44 @@ public class StopWatch implements Comparable<StopWatch> {
 		}
 	}
 
+	/**
+	 * Method that returns the start time as a String.
+	 * 
+	 * @return
+	 */
+
+	public String getStartToString() {
+		LocalTime lt = LocalTime.MIDNIGHT;
+		Duration dur = Duration.between(lt, start);
+		long HH = dur.toHoursPart();
+		long MM = dur.toMinutesPart();
+		long SS = dur.toSecondsPart();
+		long MS = dur.toMillisPart();
+		return String.format("%02d:%02d:%02d:%02d", HH, MM, SS, MS);
+	}
+
+	/**
+	 * Method that returns the latest interval as a String.
+	 * 
+	 * @return
+	 */
+
+	public String getLatestInt() {
+		if (latestInt != null) {
+			long HH = latestInt.toHoursPart();
+			long MM = latestInt.toMinutesPart();
+			long SS = latestInt.toSecondsPart();
+			long MS = latestInt.toMillisPart();
+			return String.format("%02d:%02d:%02d:%02d", HH, MM, SS, MS);
+		} else {
+			return "No time found";
+		}
+	}
+
+	/**
+	 * Method that sets interval. Adds the LocalTime to the array intervals.
+	 */
+
 	public void setInterval() {
 		for (int i = 0; i < intervals.length; i++) {
 			if (this.intervals[i] == null) {
@@ -76,6 +92,13 @@ public class StopWatch implements Comparable<StopWatch> {
 			}
 		}
 	}
+
+	/**
+	 * Method that caluclates time between start and first intervals. returns the
+	 * result as String.
+	 * 
+	 * @return
+	 */
 
 	public String getIntervals() {
 		String str = "";
@@ -92,10 +115,15 @@ public class StopWatch implements Comparable<StopWatch> {
 		return str;
 	}
 
-	// Method that returns string with the time from start to end or start to now.
-	// Checks to see if end has value, if not create new Localtime.now and
-	// calculates time between.
-	// if end has value, calculates time between start and end.
+	/**
+	 * 
+	 * Method that returns string with the time from start to end or start to now.
+	 * Checks to see if end has value, if not create new Localtime.now and
+	 * calculates time between. if end has value, calculates time between start and
+	 * end.
+	 * 
+	 * @return
+	 */
 
 	public String getDuration() {
 		LocalTime temp;
@@ -110,17 +138,18 @@ public class StopWatch implements Comparable<StopWatch> {
 		return timeBetween;
 	}
 
-	// Uses Durations compareTo-method.
-	// If getEnd is null, then the list will sort after latest interval.
-	// if getEnd has value, list will sort the end value.
+	/**
+	 * Uses Durations compareTo-method. If getEnd is null, then the list will sort
+	 * after latest interval. if getEnd has value, list will sort the end value.
+	 */
 
 	@Override
 	public int compareTo(StopWatch o) {
 		if (this.getEnd() != null) {
 			return this.totalTime.compareTo(o.totalTime);
-		} else if(latestInt != null){
+		} else if (latestInt != null) {
 			return this.latestInt.compareTo(o.latestInt);
-		}else {
+		} else {
 			System.out.println("Nothing to compare!");
 			return 2;
 		}
