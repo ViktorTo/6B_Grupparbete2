@@ -6,8 +6,14 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class FileManager {
 	ArrayList<String> readFile(String path) {
@@ -55,7 +61,29 @@ public class FileManager {
 		}
 		return false;
 	}
-
+	
+	public ArrayList<String> listDirectory(String dir){
+		ArrayList<String> files = new ArrayList<String>();
+		
+		List<File> myList;
+		
+        try {
+            myList = Files.list(Paths.get(dir))
+                        .map(Path::toFile)
+                        .collect(Collectors.toList());
+        } catch (IOException e) {
+            System.out.println("Error while reading directory!");
+            return null;
+        }
+        
+        for (Iterator iterator = myList.iterator(); iterator.hasNext();) {
+			File file = (File) iterator.next();
+			files.add(file.getName());
+		}
+		
+		return files;
+	}
+	
 	public boolean saveFile(ArrayList<String> file, String path) {
 		try {
 			// Creates a FileWriter
