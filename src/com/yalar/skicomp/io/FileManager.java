@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class FileManager {
 	ArrayList<String> readFile(String path) {
@@ -76,7 +75,7 @@ public class FileManager {
             return null;
         }
         
-        for (Iterator iterator = myList.iterator(); iterator.hasNext();) {
+        for (Iterator<File> iterator = myList.iterator(); iterator.hasNext();) {
 			File file = (File) iterator.next();
 			files.add(file.getName());
 		}
