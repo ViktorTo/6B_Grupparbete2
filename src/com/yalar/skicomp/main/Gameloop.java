@@ -1,22 +1,27 @@
 package com.yalar.skicomp.main;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.yalar.skicomp.io.FileManager;
 import com.yalar.skicomp.io.SimonLib;
 import com.yalar.skicomp.competition.*;
 import com.yalar.skicomp.participant.*;
 public class Gameloop {
-	SimonLib input;
+	FileManager fileManager;
+	//SimonLib input;
 	boolean done;
 
 	public Gameloop() {
-		input = new SimonLib();
+		fileManager = new FileManager();
+		//input = new SimonLib();
 		done = false;
 	}
 	
 	IndStart is1;	// Individual Start
 	Masstart ms1;	// MassStart
 	Sprint spr1;	// Sprint
+	Competition comp;
 	
 	public void intro() {
 		System.out.println("Welcome to YAJava Skiing Competition!\n" + "Your options are as follows:\n\n"
@@ -40,25 +45,53 @@ public class Gameloop {
 		switch(option) {
 		case 1:
 			System.out.println();
-			is1 = new IndStart(8, SimonLib.intInput(), null);
+			comp = new IndStart(8, SimonLib.intInput(), null);
+			break;
 		case 2:
-			ms1 = new Masstart(8, 7, null);
+			comp = new Masstart(8, 7, null);
+			break;
 		case 3:
-			spr1 = new Sprint(8,7,null);
+			comp = new Sprint(8,7,null);
+			break;
 		}
 		
 	}
 
 	public void result() {
-		System.out.println("Here are the results of the race.");
-		int option = SimonLib.intInput();
-		// TODO handle input
+		System.out.println("Available log files:");
+		var list = fileManager.listDirectory("./log");
+		for(var string : list){
+			System.out.println(string);
+		}
+
+		System.out.println("Enter file name");
+		String path = SimonLib.stringInput();
+		path = "./log/" + path + ".log";
+
+		if(fileManager.doesExist(path)){
+			ArrayList<String> content = fileManager.readFile(path);
+			for(var string : content){
+				System.out.println(string);
+			}
+			return;
+		}
+		System.out.println("File does not exist");
 	}
 
 	public void log() {
-		System.out.println("Lorem ipsum 3");
-		int option = SimonLib.intInput();
-		// TODO handle input
+		System.out.println("Enter file name");
+		String path = SimonLib.stringInput();
+
+		//for testing only, replace with competition.getArrayList()
+		ArrayList<String> testData = new ArrayList<>();
+		testData.add("line 1");
+		testData.add("line 2");
+		testData.add("line 3");
+
+		//return if file creation was successful
+		if(fileManager.saveFile(testData, "./log/" + path + ".log")) return;
+
+		System.err.println("An error occurred while creating the log file");
 	}
 
 	public void start() {
@@ -69,10 +102,13 @@ public class Gameloop {
 			switch (choice) {
 			case 1:
 				competition();
+				break;
 			case 2:
 				result();
+				break;
 			case 3:
 				log();
+				break;
 			case 4:
 				done = true;
 				break; // EXIT OPTION
