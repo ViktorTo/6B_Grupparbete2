@@ -13,9 +13,9 @@ public class StopWatch implements Comparable<StopWatch> {
 
 	private LocalTime start;
 	private LocalTime end;
+	private LocalTime latestInterval;
 	private LocalTime[] intervals = new LocalTime[10];
 	private Duration totalTime;
-	private Duration latestInt;
 
 	public StopWatch() {
 
@@ -23,11 +23,14 @@ public class StopWatch implements Comparable<StopWatch> {
 
 	public void setStart(LocalTime start) {
 		this.start = start;
-		latestInt = Duration.between(start, start);
 	}
 
 	public LocalTime getStart() {
 		return this.start;
+	}
+	
+	public LocalTime getLatestInterval() {
+		return this.latestInterval;
 	}
 
 	public LocalTime getEnd() {
@@ -68,11 +71,12 @@ public class StopWatch implements Comparable<StopWatch> {
 	 */
 
 	public String getLatestInt() {
-		if (latestInt != null) {
-			long HH = latestInt.toHoursPart();
-			long MM = latestInt.toMinutesPart();
-			long SS = latestInt.toSecondsPart();
-			long MS = latestInt.toMillisPart();
+		if (latestInterval != null) {
+			Duration dur = Duration.between(start, latestInterval);
+			long HH = dur.toHoursPart();
+			long MM = dur.toMinutesPart();
+			long SS = dur.toSecondsPart();
+			long MS = dur.toMillisPart();
 			return String.format("%02d:%02d:%02d:%02d", HH, MM, SS, MS);
 		} else {
 			return "No time found";
@@ -86,15 +90,15 @@ public class StopWatch implements Comparable<StopWatch> {
 	public void setInterval() {
 		for (int i = 0; i < intervals.length; i++) {
 			if (this.intervals[i] == null) {
+				latestInterval = LocalTime.now();
 				this.intervals[i] = LocalTime.now();
-				latestInt = Duration.between(start, this.intervals[i]);
 				i = intervals.length;
 			}
 		}
 	}
 
 	/**
-	 * Method that caluclates time between start and first intervals. returns the
+	 * Method that calculates time between start and first intervals. returns the
 	 * result as String.
 	 * 
 	 * @return
@@ -147,8 +151,8 @@ public class StopWatch implements Comparable<StopWatch> {
 	public int compareTo(StopWatch o) {
 		if (this.getEnd() != null) {
 			return this.totalTime.compareTo(o.totalTime);
-		} else if (latestInt != null) {
-			return this.latestInt.compareTo(o.latestInt);
+		} else if (latestInterval != null) {
+			return this.latestInterval.compareTo(o.latestInterval);
 		} else {
 			System.out.println("Nothing to compare!");
 			return 2;
