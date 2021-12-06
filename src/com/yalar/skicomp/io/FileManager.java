@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class FileManager {
-	ArrayList<String> readFile(String path) {
+	public ArrayList<String> readFile(String path) {
 		ArrayList<String> file = new ArrayList<String>();
 
 		BufferedReader myReader = null;
@@ -47,10 +47,7 @@ public class FileManager {
 
 	public boolean doesExist(String path) {
 		File f = new File(path);
-		if (f.exists()) {
-			return true;
-		}
-		return false;
+		return f.exists();
 	}
 
 	public boolean deleteFile(String path) {
@@ -75,9 +72,10 @@ public class FileManager {
             return null;
         }
         
-        for (Iterator<File> iterator = myList.iterator(); iterator.hasNext();) {
-			File file = (File) iterator.next();
-			files.add(file.getName());
+        for (var file : myList) {
+			if (!file.getName().equals("logdir.txt")) //to not include the mysterious logdir.txt file
+				//removing file extension for improved user experience
+				files.add(file.getName().replace(".log", ""));
 		}
 		
 		return files;
@@ -94,18 +92,19 @@ public class FileManager {
 
 			// Writes the string to the file
 
-			for (Iterator<String> iterator = file.iterator(); iterator.hasNext();) {
-				String line = (String) iterator.next();
+			for (var line : file) {
 				output.write(line);
+				output.newLine();
 			}
 
 			// Closes the writer
 			output.close();
+			return true;
 		}
 		catch (Exception e) {
 			e.getStackTrace();
-			return true;
+			System.err.println(e.getMessage());
+			return false;
 		}
-		return false;
 	}
 }

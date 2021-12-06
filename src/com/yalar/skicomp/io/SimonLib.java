@@ -3,11 +3,11 @@ package com.yalar.skicomp.io;
 import java.util.Scanner;
 
 public class SimonLib {
-	static Scanner scan;
+	static Scanner scan = new Scanner(System.in);
 
-	public SimonLib() {
+	/*public SimonLib() {
 		scan = new Scanner(System.in);
-	}
+	}*/
 
 	public static int intInput() {
 
