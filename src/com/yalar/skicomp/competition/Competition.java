@@ -140,10 +140,10 @@ public abstract class Competition {
 				placement = i + 1;
 				if (i != 0 && i != temp.length - 1) {
 
-					timeUp = (temp[i - 1].getStopWatch().getLatestInt() != null) ? true : false;
-					timeDown = (temp[i + 1].getStopWatch().getLatestInt() != null) ? true : false;
+					timeUp = (temp[i - 1].getStopWatch().getLatestInterval() != null) ? true : false;
+					timeDown = (temp[i + 1].getStopWatch().getLatestInterval() != null) ? true : false;
 
-					if (temp[i].getStopWatch().getLatestInt() != null) {
+					if (temp[i].getStopWatch().getLatestInterval() != null) {
 
 						if (timeUp && timeDown) {
 							Duration dur1 = Duration.between(temp[i].getStopWatch().getLatestInterval(),
@@ -190,9 +190,9 @@ public abstract class Competition {
 
 				} else if (i == 0) {
 
-					timeDown = (temp[i + 1].getStopWatch().getLatestInt() != null) ? true : false;
+					timeDown = (temp[i + 1].getStopWatch().getLatestInterval() != null) ? true : false;
 
-					if (temp[i].getStopWatch().getLatestInt() != null && timeDown) {
+					if (temp[i].getStopWatch().getLatestInterval() != null && timeDown) {
 						Duration dur1 = Duration.between(temp[i].getStopWatch().getLatestInterval(),
 								temp[i + 1].getStopWatch().getLatestInterval());
 						long HH = dur1.toHoursPart();
@@ -205,7 +205,7 @@ public abstract class Competition {
 								temp[i].getParticipantNumber() + " " + temp[i].getFullName() + " is in the lead!");
 						System.out.println(temp[i + 1].getParticipantNumber() + " " + temp[i + 1].getFullName()
 								+ " is in second with " + time + " to first!");
-					} else if (temp[i].getStopWatch().getLatestInt() != null) {
+					} else if (temp[i].getStopWatch().getLatestInterval() != null) {
 						System.out.println(temp[i].getParticipantNumber() + " " + temp[i].getFullName() + " "
 								+ temp[i].getStopWatch().getLatestInt());
 						System.out.println("Nobody in second yet!");
@@ -217,7 +217,7 @@ public abstract class Competition {
 					i = temp.length;
 				} else {
 
-					if (temp[i].getStopWatch().getLatestInt() != null) {
+					if (temp[i].getStopWatch().getLatestInterval() != null) {
 
 						Duration dur1 = Duration.between(temp[i].getStopWatch().getLatestInterval(),
 								temp[i - 1].getStopWatch().getLatestInterval());
