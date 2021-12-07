@@ -53,13 +53,14 @@ public class SimonLib {
 				't', 'u', 'v', 'w', 'x', 'y', 'z', 'å', 'ä', 'ö' };
 
 		String s = "";
+		String s_test = "";
 
 		int num = -1;
 		while (num == -1) {
 			System.out.print("> ");
 			try {
 				s = scan.nextLine();
-				s = s.toLowerCase();
+				s_test = s.toLowerCase();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -67,7 +68,7 @@ public class SimonLib {
 
 			try {
 				for (int i = 0; i < list.length; i++) {
-					for (int j = 0; j < s.length(); j++) {
+					for (int j = 0; j < s_test.length(); j++) {
 						if (s.charAt(j) == list[i]) {
 							num = 1;
 						}
