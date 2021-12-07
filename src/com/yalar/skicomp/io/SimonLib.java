@@ -4,11 +4,12 @@ import java.util.Scanner;
 
 public class SimonLib {
 	static Scanner scan = new Scanner(System.in);
-
-	/*public SimonLib() {
-		scan = new Scanner(System.in);
-	}*/
-
+	
+	/**
+	 * Takes in an integer from the user and makes sure it has a valid input.
+	 * 
+	 * @return
+	 */
 	public static int intInput() {
 
 		boolean success = false;
@@ -27,7 +28,12 @@ public class SimonLib {
 
 		return num;
 	}
-
+	
+	/**
+	 * Takes in a double from the user and makes sure it has a valid input.
+	 * 
+	 * @return
+	 */
 	public static double doubleInput() {
 
 		boolean success = false;
@@ -46,7 +52,12 @@ public class SimonLib {
 
 		return num;
 	}
-
+	
+	/**
+	 * Takes in a string from the user and makes sure it's not empty.
+	 * 
+	 * @return
+	 */
 	public static String stringInput() {
 
 		String s = "";
