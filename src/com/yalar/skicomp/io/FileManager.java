@@ -14,6 +14,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class FileManager {
+	
+	/**
+	 * Reads a file into an ArrayList where each line in the file
+	 * becomes an entry in the ArrayList.
+	 * 
+	 * @param path
+	 * @return
+	 */
 	public ArrayList<String> readFile(String path) {
 		ArrayList<String> file = new ArrayList<String>();
 
@@ -43,12 +51,24 @@ public class FileManager {
 		}
 		return file;
 	}
-
+	
+	/**
+	 * Checks if a file exists.
+	 * 
+	 * @param path
+	 * @return
+	 */
 	public boolean doesExist(String path) {
 		File f = new File(path);
 		return f.exists();
 	}
-
+	
+	/**
+	 * Deletes a file.
+	 * 
+	 * @param path
+	 * @return
+	 */
 	public boolean deleteFile(String path) {
 		File file = new File(path);
 		if (file.exists()) {
@@ -57,13 +77,19 @@ public class FileManager {
 		return false;
 	}
 	
-	public ArrayList<String> listDirectory(String dir){
+	/**
+	 * Lists all files in a directory.
+	 * 
+	 * @param dir
+	 * @return
+	 */
+	public ArrayList<String> listDirectory(String path){
 		ArrayList<String> files = new ArrayList<String>();
 		
 		List<File> myList;
 		
         try {
-            myList = Files.list(Paths.get(dir))
+            myList = Files.list(Paths.get(path))
                         .map(Path::toFile)
                         .collect(Collectors.toList());
         } catch (IOException e) {
@@ -81,6 +107,13 @@ public class FileManager {
 		return files;
 	}
 	
+	/**
+	 * Saves an ArrayList to a file.
+	 * 
+	 * @param file
+	 * @param path
+	 * @return
+	 */
 	public boolean saveFile(ArrayList<String> file, String path) {
 		try {
 			// Creates a FileWriter
