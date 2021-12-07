@@ -154,8 +154,7 @@ public class StopWatch implements Comparable<StopWatch> {
 		} else if (latestInterval != null) {
 			return this.latestInterval.compareTo(o.latestInterval);
 		} else {
-			System.out.println("Nothing to compare!");
-			return 2;
+			return -1;
 		}
 
 	}
