@@ -59,6 +59,7 @@ public class SimonLib {
 			System.out.print("> ");
 			try {
 				s = scan.nextLine();
+				s = s.toLowerCase();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
