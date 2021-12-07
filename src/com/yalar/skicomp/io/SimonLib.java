@@ -11,12 +11,14 @@ public class SimonLib {
 
 	public static int intInput() {
 
-		int num = -1;
-		while (num == -1) {
+		boolean success = false;
+		int num = 0;
+		while (!success) {
 			System.out.print("> ");
 			String s = scan.nextLine();
 			try {
 				num = Integer.parseInt(s);
+				success = true;
 			} catch (Exception e) {
 				System.out.println("Only enter integers!");
 				num = -1;
@@ -28,12 +30,14 @@ public class SimonLib {
 
 	public static double doubleInput() {
 
-		double num = -1;
-		while (num == -1) {
+		boolean success = false;
+		double num = 0;
+		while (!success) {
 			System.out.print("> ");
 			String s = scan.nextLine();
 			try {
 				num = Double.parseDouble(s);
+				success = true;
 			} catch (Exception e) {
 				System.out.println("Only enter doubles!");
 				num = -1;
