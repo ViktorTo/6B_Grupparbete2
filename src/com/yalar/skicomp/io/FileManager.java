@@ -14,10 +14,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class FileManager {
-	
+
 	/**
-	 * Reads a file into an ArrayList where each line in the file
-	 * becomes an entry in the ArrayList.
+	 * Reads a file into an ArrayList where each line in the file becomes an entry
+	 * in the ArrayList.
 	 * 
 	 * @param path
 	 * @return
@@ -51,7 +51,7 @@ public class FileManager {
 		}
 		return file;
 	}
-	
+
 	/**
 	 * Checks if a file exists.
 	 * 
@@ -62,7 +62,7 @@ public class FileManager {
 		File f = new File(path);
 		return f.exists();
 	}
-	
+
 	/**
 	 * Deletes a file.
 	 * 
@@ -76,37 +76,36 @@ public class FileManager {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Lists all files in a directory.
 	 * 
 	 * @param dir
 	 * @return
 	 */
-	public ArrayList<String> listDirectory(String path){
+	public ArrayList<String> listDirectory(String path) {
 		ArrayList<String> files = new ArrayList<String>();
-		
+
 		List<File> myList;
-		
-        try {
-            myList = Files.list(Paths.get(path))
-                        .map(Path::toFile)
-                        .collect(Collectors.toList());
-        } catch (IOException e) {
-            System.out.println("Error while reading directory!");
-            return null;
-        }
-        
-        for (var file : myList) {
-			if (!file.getName().equals("logdir.txt")) //to not include the mysterious logdir.txt file
-				
-				//removing file extension for improved user experience
-				files.add(file.getName().replace(".log", ""));
+
+		try {
+			myList = Files.list(Paths.get(path)).map(Path::toFile).collect(Collectors.toList());
+		} catch (IOException e) {
+			System.out.println("Error while reading directory!");
+			return null;
 		}
-		
+
+		for (var file : myList) {
+			// to not include the mysterious logdir.txt file
+			if (!file.getName().equals("logdir.txt")) {
+				// removing file extension for improved user experience
+				files.add(file.getName().replace(".log", ""));
+			}
+		}
+
 		return files;
 	}
-	
+
 	/**
 	 * Saves an ArrayList to a file.
 	 * 
@@ -118,7 +117,6 @@ public class FileManager {
 		try {
 			// Creates a FileWriter
 			FileWriter fp = new FileWriter(path);
-
 
 			// Creates a BufferedWriter
 			BufferedWriter output = new BufferedWriter(fp);
@@ -133,8 +131,7 @@ public class FileManager {
 			// Closes the writer
 			output.close();
 			return true;
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			e.getStackTrace();
 			System.err.println(e.getMessage());
 			return false;

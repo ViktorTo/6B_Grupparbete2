@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class SimonLib {
 	static Scanner scan = new Scanner(System.in);
-	
+
 	/**
 	 * Takes in an integer from the user and makes sure it has a valid input.
 	 * 
@@ -28,7 +28,7 @@ public class SimonLib {
 
 		return num;
 	}
-	
+
 	/**
 	 * Takes in a double from the user and makes sure it has a valid input.
 	 * 
@@ -52,7 +52,7 @@ public class SimonLib {
 
 		return num;
 	}
-	
+
 	/**
 	 * Takes in a string from the user and makes sure it's not empty.
 	 * 
