@@ -3,6 +3,7 @@ package com.yalar.skicomp.competition;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 import com.yalar.skicomp.participant.Participant;
 import com.yalar.skicomp.stopwatch.StopWatch;
@@ -122,134 +123,117 @@ public abstract class Competition {
 	 * 
 	 * @param skiNum
 	 */
-
-	public void checkPlacementet(int skiNum) {
-
-		Participant[] temp = skiers.clone();
-
+	
+	public void checkPlacement(int partNum) {
+		ArrayList<Participant> temp = new ArrayList<Participant>();
+		boolean inList = false;
 		int placement = 0;
-		Arrays.sort(temp);
-		String time1 = "";
-		String time2 = "";
-		boolean timeUp;
-		boolean timeDown;
+		int index = 0;
+		String time1;
+		String time2;
 
-		for (int i = 0; i < temp.length; i++) {
+		for (int i = 0; i < skiers.length; i++) {
 
-			if (skiNum == temp[i].getParticipantNumber()) {
-				placement = i + 1;
-				if (i != 0 && i != temp.length - 1) {
+			if (skiers[i].getStopWatch().getLatestInterval() != null) {
+				temp.add(skiers[i]);
+				inList = (skiers[i].getParticipantNumber() == partNum || inList) ? true : false;
+			}
+		}
 
-					timeUp = (temp[i - 1].getStopWatch().getLatestInterval() != null) ? true : false;
-					timeDown = (temp[i + 1].getStopWatch().getLatestInterval() != null) ? true : false;
+		if (inList) {
 
-					if (temp[i].getStopWatch().getLatestInterval() != null) {
+			Collections.sort(temp);
 
-						if (timeUp && timeDown) {
-							Duration dur1 = Duration.between(temp[i].getStopWatch().getLatestInterval(),
-									temp[i - 1].getStopWatch().getLatestInterval());
-							long HH1 = Math.abs(dur1.toHoursPart());
-							long MM1 = Math.abs(dur1.toMinutesPart());
-							long SS1 = Math.abs(dur1.toSecondsPart());
-							long MS1 = Math.abs(dur1.toMillisPart());
-							time1 = String.format("%02d:%02d:%02d:%02d", HH1, MM1, SS1, MS1);
-
-							Duration dur2 = Duration.between(temp[i].getStopWatch().getLatestInterval(),
-									temp[i + 1].getStopWatch().getLatestInterval());
-							long HH2 = dur2.toHoursPart();
-							long MM2 = dur2.toMinutesPart();
-							long SS2 = dur2.toSecondsPart();
-							long MS2 = dur2.toMillisPart();
-							time2 = String.format("%02d:%02d:%02d:%02d", HH2, MM2, SS2, MS2);
-
-							System.out.println(temp[i].getParticipantNumber() + " " + temp[i].getFullName()
-									+ " is number " + placement + " in the field and have " + time1
-									+ " to the skier in front!");
-							System.out.println("The time to the skier behind is " + time2);
-
-						}else if(timeUp) {
-							Duration dur1 = Duration.between(temp[i].getStopWatch().getLatestInterval(),
-									temp[i - 1].getStopWatch().getLatestInterval());
-							long HH1 = Math.abs(dur1.toHoursPart());
-							long MM1 = Math.abs(dur1.toMinutesPart());
-							long SS1 = Math.abs(dur1.toSecondsPart());
-							long MS1 = Math.abs(dur1.toMillisPart());
-							time1 = String.format("%02d:%02d:%02d:%02d", HH1, MM1, SS1, MS1);
-							
-							System.out.println(temp[i].getParticipantNumber() + " " + temp[i].getFullName()
-									+ " is number " + placement + " in the field and have " + time1
-									+ " to the skier in front!");
-							System.out.println("No time for skier behind");
-						}
-
-					} else {
-						System.out.println(
-								temp[i].getParticipantNumber() + " " + temp[i].getFullName() + ": 00:00:00:00");
-					}
-					i = temp.length;
-
-				} else if (i == 0) {
-
-					timeDown = (temp[i + 1].getStopWatch().getLatestInterval() != null) ? true : false;
-
-					if (temp[i].getStopWatch().getLatestInterval() != null && timeDown) {
-						Duration dur1 = Duration.between(temp[i].getStopWatch().getLatestInterval(),
-								temp[i + 1].getStopWatch().getLatestInterval());
-						long HH = dur1.toHoursPart();
-						long MM = dur1.toMinutesPart();
-						long SS = dur1.toSecondsPart();
-						long MS = dur1.toMillisPart();
-						String time = String.format("%02d:%02d:%02d:%02d", HH, MM, SS, MS);
-
-						System.out.println(
-								temp[i].getParticipantNumber() + " " + temp[i].getFullName() + " is in the lead!");
-						System.out.println(temp[i + 1].getParticipantNumber() + " " + temp[i + 1].getFullName()
-								+ " is in second with " + time + " to first!");
-					} else if (temp[i].getStopWatch().getLatestInterval() != null) {
-						System.out.println(temp[i].getParticipantNumber() + " " + temp[i].getFullName() + " "
-								+ temp[i].getStopWatch().getLatestInt());
-						System.out.println("Nobody in second yet!");
-					} else {
-
-						System.out.println(
-								temp[i].getParticipantNumber() + " " + temp[i].getFullName() + " has no time yet!");
-					}
-					i = temp.length;
-				} else {
-
-					if (temp[i].getStopWatch().getLatestInterval() != null) {
-
-						Duration dur1 = Duration.between(temp[i].getStopWatch().getLatestInterval(),
-								temp[i - 1].getStopWatch().getLatestInterval());
-						long HH = Math.abs(dur1.toHoursPart());
-						long MM = Math.abs(dur1.toMinutesPart());
-						long SS = Math.abs(dur1.toSecondsPart());
-						long MS = Math.abs(dur1.toMillisPart());
-						String time = String.format("%02d:%02d:%02d:%02d", HH, MM, SS, MS);
-
-						System.out.println(temp[i].getParticipantNumber() + " " + temp[i].getFullName() + " is last!");
-						System.out.println(temp[i - 1].getParticipantNumber() + " " + temp[i - 1].getFullName()
-								+ " is the skier in front, they have " + time + " between the two skiers");
-
-					} else {
-						System.out.println(
-								temp[i].getParticipantNumber() + " " + temp[i].getFullName() + ": 00:00:00:00");
-					}
-
-					i = temp.length;
+			for (Participant p : temp) {
+				if (p.getParticipantNumber() == partNum) {
+					placement = temp.indexOf(p) + 1;
+					index = temp.indexOf(p);
 				}
 			}
 
-		}
+			if (index == 0) {
+				
+				if(temp.size() > 1) {
+				
+				Duration dur1 = Duration.between(temp.get(index).getStopWatch().getLatestInterval(),
+						temp.get(index + 1).getStopWatch().getLatestInterval());
+				long HH = dur1.toHoursPart();
+				long MM = dur1.toMinutesPart();
+				long SS = dur1.toSecondsPart();
+				long MS = dur1.toMillisPart();
+				String time = String.format("%02d:%02d:%02d:%02d", HH, MM, SS, MS);
 
-		if (placement == 0)
+				System.out.println(temp.get(index).getParticipantNumber() + " " + temp.get(index).getFullName()
+						+ " is in the lead!");
+				System.out.println(temp.get(index + 1).getParticipantNumber() + " "
+						+ temp.get(index + 1).getFullName() + " is in second with " + time + " to first!");
+				}else {
+					System.out.println(temp.get(index).getParticipantNumber() + " " + temp.get(index).getFullName()
+							+ " is in the lead!");
+					System.out.println("First to reach the checkpoint, Time: " + temp.get(index).getStopWatch().getLatestInt());
+				}
 
-		{
-			System.out.println("Nobody with that number is in this competition!");
+			} else if (index == skiers.length - 1) {
+				Duration dur1 = Duration.between(temp.get(index).getStopWatch().getLatestInterval(),
+						temp.get(index - 1).getStopWatch().getLatestInterval());
+				long HH = Math.abs(dur1.toHoursPart());
+				long MM = Math.abs(dur1.toMinutesPart());
+				long SS = Math.abs(dur1.toSecondsPart());
+				long MS = Math.abs(dur1.toMillisPart());
+				String time = String.format("%02d:%02d:%02d:%02d", HH, MM, SS, MS);
 
+				System.out.println(temp.get(index).getParticipantNumber() + " " + temp.get(index).getFullName()
+						+ " is last!");
+				System.out.println(
+						temp.get(index - 1).getParticipantNumber() + " " + temp.get(index - 1).getFullName()
+								+ " is the skier in front, they have " + time + " between the two skiers");
+
+			} else {
+				
+				if(temp.size() > 2 && index != temp.size() - 1) {
+				Duration dur1 = Duration.between(temp.get(index).getStopWatch().getLatestInterval(),
+						temp.get(index - 1).getStopWatch().getLatestInterval());
+				long HH1 = Math.abs(dur1.toHoursPart());
+				long MM1 = Math.abs(dur1.toMinutesPart());
+				long SS1 = Math.abs(dur1.toSecondsPart());
+				long MS1 = Math.abs(dur1.toMillisPart());
+				time1 = String.format("%02d:%02d:%02d:%02d", HH1, MM1, SS1, MS1);
+
+				Duration dur2 = Duration.between(temp.get(index).getStopWatch().getLatestInterval(),
+						temp.get(index + 1).getStopWatch().getLatestInterval());
+				long HH2 = dur2.toHoursPart();
+				long MM2 = dur2.toMinutesPart();
+				long SS2 = dur2.toSecondsPart();
+				long MS2 = dur2.toMillisPart();
+				time2 = String.format("%02d:%02d:%02d:%02d", HH2, MM2, SS2, MS2);
+
+				System.out.println(temp.get(index).getParticipantNumber() + " " + temp.get(index).getFullName()
+						+ " is number " + placement + " in the field and have " + time1 + " to the skier in front!");
+				System.out.println("The time to the skier behind is " + time2);
+				
+				}else {
+					
+					Duration dur1 = Duration.between(temp.get(index).getStopWatch().getLatestInterval(),
+							temp.get(index - 1).getStopWatch().getLatestInterval());
+					long HH1 = Math.abs(dur1.toHoursPart());
+					long MM1 = Math.abs(dur1.toMinutesPart());
+					long SS1 = Math.abs(dur1.toSecondsPart());
+					long MS1 = Math.abs(dur1.toMillisPart());
+					time1 = String.format("%02d:%02d:%02d:%02d", HH1, MM1, SS1, MS1);
+					
+					System.out.println(temp.get(index).getParticipantNumber() + " " + temp.get(index).getFullName()
+							+ " is number " + placement + " in the field and have " + time1 + " to the skier in front!");
+					System.out.println("Latest skier to the checkpoint!");
+				}
+			}
+
+		} else {
+			System.out.println("Skier has not reached the checkpoint yet!");
 		}
 
 	}
+
+	
 
 	public String getCompTime() {
 
