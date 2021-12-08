@@ -152,7 +152,12 @@ public class StopWatch implements Comparable<StopWatch> {
 		if (this.getEnd() != null) {
 			return this.totalTime.compareTo(o.totalTime);
 		} else if (latestInterval != null) {
-			return this.latestInterval.compareTo(o.latestInterval);
+			if (o.latestInterval != null) {
+				return this.latestInterval.compareTo(o.latestInterval);
+			}else {
+				return 0;
+			}
+			
 		} else {
 			return -1;
 		}
