@@ -117,7 +117,7 @@ public abstract class Competition {
 
 	/**
 	 * Method will find the entered number (if it is available in the participant
-	 * array) sort a temporary array to find out where in the field the skier is
+	 * array) sort a temporary arraylist to find out where in the field the skier is
 	 * located. When located, the method will print out placement and time between
 	 * skiers.
 	 * 
@@ -233,7 +233,32 @@ public abstract class Competition {
 
 	}
 
-	
+	public void checkField() {
+		
+		ArrayList<Participant> temp = new ArrayList<Participant>();
+		
+		for (int i = 0; i < skiers.length; i++) {
+			
+			if(skiers[i].getStopWatch().getLatestInterval() != null) {
+				temp.add(skiers[i]);
+			}
+		}
+		
+		Collections.sort(temp);
+		
+		for (Participant p : temp) {
+			System.out.println(p.getParticipantNumber() + " " + p.getFullName() + ": " + p.getStopWatch().getLatestInt());
+		}
+		
+		for (int i = 0; i < skiers.length; i++) {
+			
+			if(!(temp.contains(skiers[i]))) {
+				System.out.println(skiers[i].getParticipantNumber() + " " + skiers[i].getFullName() + ": NO TIME");
+			}
+			
+		}
+		
+	}
 
 	public String getCompTime() {
 
