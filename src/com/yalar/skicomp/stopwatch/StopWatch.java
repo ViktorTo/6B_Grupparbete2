@@ -88,7 +88,7 @@ public class StopWatch implements Comparable<StopWatch> {
 	 */
 
 	public void setInterval() {
-		boolean b = (this.getEnd() != null);
+		boolean b = (this.getEnd() == null);
 		if (b) {
 			for (int i = 0; i < intervals.length; i++) {
 				if (this.intervals[i] == null) {
