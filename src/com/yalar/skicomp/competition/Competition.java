@@ -214,7 +214,7 @@ public abstract class Competition {
 		Collections.sort(finished);
 
 		for (Participant p : finished) {
-			System.out.println(p.getParticipantNumber() + " " + p.getFullName() + ": " + p.getStopWatch().getLatestInt()
+			System.out.println(p.getParticipantNumber() + " " + p.getFullName() + ": " + p.getStopWatch().getEnd()
 					+ " Finished");
 		}
 
@@ -224,7 +224,7 @@ public abstract class Competition {
 
 		for (int i = 0; i < skiers.length; i++) {
 
-			if (!(finished.contains(skiers[i]) && !(interval.contains(skiers[i])))) {
+			if (!finished.contains(skiers[i]) || !interval.contains(skiers[i])) {
 				System.out.println(skiers[i].getParticipantNumber() + " " + skiers[i].getFullName() + ": NO TIME");
 			}
 
