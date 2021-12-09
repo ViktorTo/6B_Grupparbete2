@@ -22,8 +22,8 @@ public class FileManager {
 	 * @param path
 	 * @return
 	 */
-	public ArrayList<String> readFile(String path) {
-		ArrayList<String> file = new ArrayList<String>();
+	public List<String> readFile(String path) {
+		List<String> file = new ArrayList<String>();
 
 		BufferedReader myReader = null;
 		try {
@@ -83,8 +83,8 @@ public class FileManager {
 	 * @param dir
 	 * @return
 	 */
-	public ArrayList<String> listDirectory(String path) {
-		ArrayList<String> files = new ArrayList<String>();
+	public List<String> listDirectory(String path) {
+		List<String> files = new ArrayList<String>();
 
 		List<File> myList;
 
@@ -113,7 +113,7 @@ public class FileManager {
 	 * @param path
 	 * @return
 	 */
-	public boolean saveFile(ArrayList<String> file, String path) {
+	public boolean saveFile(List<String> file, String path) {
 		try {
 			// Creates a FileWriter
 			FileWriter fp = new FileWriter(path);
