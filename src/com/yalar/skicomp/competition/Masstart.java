@@ -34,5 +34,24 @@ public class Masstart extends Competition {
 	public void setNumOfParticipants(int numOfParticipants) {
 		this.numOfParticipants = numOfParticipants;
 	}
+	
+	/**
+	 * Method that starts all skiers. The start time will be the same for all skiers
+	 * in the array. If startClock is null, the clock will be set in the method.
+	 * 
+	 * @param skiers
+	 */
+	
+	public void startAllSkiers(Participant[] skiers) {
+
+		if (getSw().getStart() == null) {
+			getSw().startClock();
+		}
+
+		for (int i = 0; i < skiers.length; i++) {
+			skiers[i].getStopWatch().setStart(getSw().getStart());
+		}
+
+	}
 
 }

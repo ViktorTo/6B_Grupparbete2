@@ -4,6 +4,7 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import com.yalar.skicomp.participant.Participant;
 import com.yalar.skicomp.stopwatch.StopWatch;
@@ -41,10 +42,15 @@ public abstract class Competition {
 	public void sortResults() {
 		Arrays.sort(this.skiers);
 	}
+	
+	/**
+	 * Convert Array of skiers to ArrayList.
+	 * @return
+	 */
 
 	public ArrayList<String> getArraylist() {
 
-		ArrayList<String> a1 = new ArrayList<String>();
+		ArrayList<String> a1 = new ArrayList<>();
 
 		for (int i = 0; i < skiers.length; i++) {
 			a1.add(skiers[i].toString() + " " + skiers[i].getStopWatch().getDuration());
@@ -54,50 +60,6 @@ public abstract class Competition {
 
 	}
 
-	/**
-	 * Method that starts all skiers. The start time will be the same for all skiers
-	 * in the array. If startClock is null, the clock will be set in the method.
-	 * 
-	 * @param skiers
-	 */
-
-	public void startAllSkiers(Participant[] skiers) {
-
-		if (sw.getStart() == null) {
-			sw.startClock();
-		}
-
-		for (int i = 0; i < skiers.length; i++) {
-			skiers[i].getStopWatch().setStart(sw.getStart());
-		}
-
-	}
-
-	/**
-	 * Method for induvidual start. Skiers will start with intervals, i is seconds.
-	 * 
-	 * @param skiers
-	 * @param i
-	 */
-
-	public void startSkierIntervall(Participant[] skiers, int i) {
-
-		for (int j = 0; j < skiers.length; j++) {
-
-			skiers[j].getStopWatch().startClock();
-			System.out.println(skiers[j].getParticipantNumber() + ", " + skiers[j].getFullName() + ", "
-					+ skiers[j].getCountry() + " is starting");
-
-			try {
-				Thread.sleep(i * 1000);
-			} catch (InterruptedException e) {
-
-				e.printStackTrace();
-			}
-
-		}
-
-	}
 
 	public String getDuration(Participant skier) {
 
@@ -125,7 +87,7 @@ public abstract class Competition {
 	 */
 	
 	public void checkPlacement(int partNum) {
-		ArrayList<Participant> temp = new ArrayList<Participant>();
+		List<Participant> temp = new ArrayList<>();
 		boolean inList = false;
 		int placement = 0;
 		int index = 0;
@@ -235,7 +197,7 @@ public abstract class Competition {
 
 	public void checkField() {
 		
-		ArrayList<Participant> temp = new ArrayList<Participant>();
+		List<Participant> temp = new ArrayList<>();
 		
 		for (int i = 0; i < skiers.length; i++) {
 			
@@ -260,6 +222,15 @@ public abstract class Competition {
 		
 	}
 
+	public boolean isCompDone() {
+		for (Participant p : skiers) {
+			if(p.getStopWatch().getEnd() == null) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
 	public String getCompTime() {
 
 		if (sw.getEnd() != null) {
