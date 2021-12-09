@@ -48,12 +48,12 @@ public abstract class Competition {
 	 * @return
 	 */
 
-	public ArrayList<String> getArraylist() {
+	public List<String> getArraylist() {
 
-		ArrayList<String> a1 = new ArrayList<>();
-
-		for (int i = 0; i < skiers.length; i++) {
-			a1.add(skiers[i].toString() + " " + skiers[i].getStopWatch().getDuration());
+		List<String> a1 = new ArrayList<>();
+		
+		for (Participant s : skiers) {
+			a1.add(s.toString() + " " + s.getStopWatch().getDuration());
 		}
 
 		return a1;
@@ -196,30 +196,40 @@ public abstract class Competition {
 	}
 
 	public void checkField() {
-		
-		List<Participant> temp = new ArrayList<>();
-		
-		for (int i = 0; i < skiers.length; i++) {
-			
-			if(skiers[i].getStopWatch().getLatestInterval() != null) {
-				temp.add(skiers[i]);
+
+		List<Participant> interval = new ArrayList<>();
+		List<Participant> finished = new ArrayList<>();
+		boolean end = false;
+
+		for (Participant s : skiers) {
+
+			if (s.getStopWatch().getEnd() != null) {
+				finished.add(s);
+			} else if (s.getStopWatch().getLatestInterval() != null) {
+				interval.add(s);
 			}
 		}
-		
-		Collections.sort(temp);
-		
-		for (Participant p : temp) {
+
+		Collections.sort(interval);
+		Collections.sort(finished);
+
+		for (Participant p : finished) {
+			System.out.println(p.getParticipantNumber() + " " + p.getFullName() + ": " + p.getStopWatch().getLatestInt()
+					+ " Finished");
+		}
+
+		for (Participant p : interval) {
 			System.out.println(p.getParticipantNumber() + " " + p.getFullName() + ": " + p.getStopWatch().getLatestInt());
 		}
-		
+
 		for (int i = 0; i < skiers.length; i++) {
-			
-			if(!(temp.contains(skiers[i]))) {
+
+			if (!(finished.contains(skiers[i]) && !(interval.contains(skiers[i])))) {
 				System.out.println(skiers[i].getParticipantNumber() + " " + skiers[i].getFullName() + ": NO TIME");
 			}
-			
+
 		}
-		
+
 	}
 
 	public boolean isCompDone() {

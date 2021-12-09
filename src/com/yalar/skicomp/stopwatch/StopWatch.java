@@ -88,11 +88,14 @@ public class StopWatch implements Comparable<StopWatch> {
 	 */
 
 	public void setInterval() {
-		for (int i = 0; i < intervals.length; i++) {
-			if (this.intervals[i] == null) {
-				latestInterval = LocalTime.now();
-				this.intervals[i] = LocalTime.now();
-				i = intervals.length;
+		boolean b = (this.getEnd() != null);
+		if (b) {
+			for (int i = 0; i < intervals.length; i++) {
+				if (this.intervals[i] == null) {
+					latestInterval = LocalTime.now();
+					this.intervals[i] = LocalTime.now();
+					i = intervals.length;
+				}
 			}
 		}
 	}
