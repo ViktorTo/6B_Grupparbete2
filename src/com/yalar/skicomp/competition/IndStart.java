@@ -42,5 +42,31 @@ public class IndStart extends Competition {
 	public void startSkierTime(Participant skier) {
 		skier.getStopWatch().startClock();
 	}
+	
+	/**
+	 * Method for induvidual start. Skiers will start with intervals, i is seconds.
+	 * 
+	 * @param skiers
+	 * @param i
+	 */
+	
+	public void startSkierIntervall(Participant[] skiers, int i) {
+
+		for (int j = 0; j < skiers.length; j++) {
+
+			skiers[j].getStopWatch().startClock();
+			System.out.println(skiers[j].getParticipantNumber() + ", " + skiers[j].getFullName() + ", "
+					+ skiers[j].getCountry() + " is starting");
+
+			try {
+				Thread.sleep(i * 1000);
+			} catch (InterruptedException e) {
+
+				e.printStackTrace();
+			}
+
+		}
+
+	}
 
 }
