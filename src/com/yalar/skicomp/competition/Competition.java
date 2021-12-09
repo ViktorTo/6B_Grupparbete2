@@ -224,7 +224,7 @@ public abstract class Competition {
 
 		for (int i = 0; i < skiers.length; i++) {
 
-			if (!finished.contains(skiers[i]) || !interval.contains(skiers[i])) {
+			if (!finished.contains(skiers[i]) && !interval.contains(skiers[i])) {
 				System.out.println(skiers[i].getParticipantNumber() + " " + skiers[i].getFullName() + ": NO TIME");
 			}
 
