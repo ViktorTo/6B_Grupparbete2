@@ -65,12 +65,13 @@ public abstract class Competition {
 
 		if (skier.getStopWatch().getEnd() != null) {
 
-			Duration dur = Duration.between(this.sw.getStart(), skier.getStopWatch().getEnd());
-			long HH = dur.toHoursPart();
-			long MM = dur.toMinutesPart();
-			long SS = dur.toSecondsPart();
-			long MS = dur.toMillisPart();
-			return String.format("%02d:%02d:%02d:%02d", HH, MM, SS, MS);
+//			Duration dur = Duration.between(this.sw.getStart(), skier.getStopWatch().getEnd());
+//			long HH = dur.toHoursPart();
+//			long MM = dur.toMinutesPart();
+//			long SS = dur.toSecondsPart();
+//			long MS = dur.toMillisPart();
+//			return String.format("%02d:%02d:%02d:%02d", HH, MM, SS, MS);
+			return StopWatch.getDurationToString(this.sw.getStart(), skier.getStopWatch().getEnd());
 		}
 
 		return "Skier have not finished";
@@ -117,13 +118,15 @@ public abstract class Competition {
 				
 				if(temp.size() > 1) {
 				
-				Duration dur1 = Duration.between(temp.get(index).getStopWatch().getLatestInterval(),
-						temp.get(index + 1).getStopWatch().getLatestInterval());
-				long HH = dur1.toHoursPart();
-				long MM = dur1.toMinutesPart();
-				long SS = dur1.toSecondsPart();
-				long MS = dur1.toMillisPart();
-				String time = String.format("%02d:%02d:%02d:%02d", HH, MM, SS, MS);
+//				Duration dur1 = Duration.between(temp.get(index).getStopWatch().getLatestInterval(),
+//						temp.get(index + 1).getStopWatch().getLatestInterval());
+//				long HH = dur1.toHoursPart();
+//				long MM = dur1.toMinutesPart();
+//				long SS = dur1.toSecondsPart();
+//				long MS = dur1.toMillisPart();
+//				String time = String.format("%02d:%02d:%02d:%02d", HH, MM, SS, MS);
+				String time = StopWatch.getDurationToString(temp.get(index).getStopWatch().getLatestInterval(), temp.get(index + 1).getStopWatch().getLatestInterval());
+				
 
 				System.out.println(temp.get(index).getParticipantNumber() + " " + temp.get(index).getFullName()
 						+ " is in the lead!");
@@ -136,13 +139,14 @@ public abstract class Competition {
 				}
 
 			} else if (index == skiers.length - 1) {
-				Duration dur1 = Duration.between(temp.get(index).getStopWatch().getLatestInterval(),
-						temp.get(index - 1).getStopWatch().getLatestInterval());
-				long HH = Math.abs(dur1.toHoursPart());
-				long MM = Math.abs(dur1.toMinutesPart());
-				long SS = Math.abs(dur1.toSecondsPart());
-				long MS = Math.abs(dur1.toMillisPart());
-				String time = String.format("%02d:%02d:%02d:%02d", HH, MM, SS, MS);
+//				Duration dur1 = Duration.between(temp.get(index).getStopWatch().getLatestInterval(),
+//						temp.get(index - 1).getStopWatch().getLatestInterval());
+//				long HH = Math.abs(dur1.toHoursPart());
+//				long MM = Math.abs(dur1.toMinutesPart());
+//				long SS = Math.abs(dur1.toSecondsPart());
+//				long MS = Math.abs(dur1.toMillisPart());
+//				String time = String.format("%02d:%02d:%02d:%02d", HH, MM, SS, MS);
+				String time = StopWatch.getDurationToString(temp.get(index).getStopWatch().getLatestInterval(), temp.get(index - 1).getStopWatch().getLatestInterval());
 
 				System.out.println(temp.get(index).getParticipantNumber() + " " + temp.get(index).getFullName()
 						+ " is last!");
@@ -153,14 +157,14 @@ public abstract class Competition {
 			} else {
 				
 				if(temp.size() > 2 && index != temp.size() - 1) {
-				Duration dur1 = Duration.between(temp.get(index).getStopWatch().getLatestInterval(),
-						temp.get(index - 1).getStopWatch().getLatestInterval());
-				long HH1 = Math.abs(dur1.toHoursPart());
-				long MM1 = Math.abs(dur1.toMinutesPart());
-				long SS1 = Math.abs(dur1.toSecondsPart());
-				long MS1 = Math.abs(dur1.toMillisPart());
-				time1 = String.format("%02d:%02d:%02d:%02d", HH1, MM1, SS1, MS1);
-
+//				Duration dur1 = Duration.between(temp.get(index).getStopWatch().getLatestInterval(),
+//						temp.get(index - 1).getStopWatch().getLatestInterval());
+//				long HH1 = Math.abs(dur1.toHoursPart());
+//				long MM1 = Math.abs(dur1.toMinutesPart());
+//				long SS1 = Math.abs(dur1.toSecondsPart());
+//				long MS1 = Math.abs(dur1.toMillisPart());
+//				time1 = String.format("%02d:%02d:%02d:%02d", HH1, MM1, SS1, MS1);
+				time1 = StopWatch.getDurationToString(temp.get(index).getStopWatch().getLatestInterval(), temp.get(index - 1).getStopWatch().getLatestInterval());
 				Duration dur2 = Duration.between(temp.get(index).getStopWatch().getLatestInterval(),
 						temp.get(index + 1).getStopWatch().getLatestInterval());
 				long HH2 = dur2.toHoursPart();
@@ -257,5 +261,6 @@ public abstract class Competition {
 		return "Competition has not ended";
 
 	}
+	
 
 }
