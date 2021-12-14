@@ -28,7 +28,7 @@ public class StopWatch implements Comparable<StopWatch> {
 	public LocalTime getStart() {
 		return this.start;
 	}
-	
+
 	public LocalTime getLatestInterval() {
 		return this.latestInterval;
 	}
@@ -47,15 +47,6 @@ public class StopWatch implements Comparable<StopWatch> {
 			totalTime = Duration.between(this.start, this.end);
 		}
 	}
-	
-	public static String getDurationToString(LocalTime t1, LocalTime t2) {
-		Duration dur = Duration.between(t1, t2);
-		long HH = dur.toHoursPart();
-		long MM = dur.toMinutesPart();
-		long SS = dur.toSecondsPart();
-		long MS = dur.toMillisPart();
-		return String.format("%02d:%02d:%02d:%02d", HH, MM, SS, MS);
-	}
 
 	/**
 	 * Method that returns the start time as a String.
@@ -64,13 +55,7 @@ public class StopWatch implements Comparable<StopWatch> {
 	 */
 
 	public String getStartToString() {
-//		LocalTime lt = LocalTime.MIDNIGHT;
-//		Duration dur = Duration.between(lt, start);
-//		long HH = dur.toHoursPart();
-//		long MM = dur.toMinutesPart();
-//		long SS = dur.toSecondsPart();
-//		long MS = dur.toMillisPart();
-//		return String.format("%02d:%02d:%02d:%02d", HH, MM, SS, MS);
+
 		return getDurationToString(LocalTime.MIDNIGHT, start);
 	}
 
@@ -82,12 +67,6 @@ public class StopWatch implements Comparable<StopWatch> {
 
 	public String getLatestInt() {
 		if (latestInterval != null) {
-//			Duration dur = Duration.between(start, latestInterval);
-//			long HH = dur.toHoursPart();
-//			long MM = dur.toMinutesPart();
-//			long SS = dur.toSecondsPart();
-//			long MS = dur.toMillisPart();
-//			return String.format("%02d:%02d:%02d:%02d", HH, MM, SS, MS);
 			return getDurationToString(start, latestInterval);
 		} else {
 			return "No time found";
@@ -122,12 +101,6 @@ public class StopWatch implements Comparable<StopWatch> {
 		String str = "";
 		for (int i = 0; i < intervals.length; i++) {
 			if (intervals[i] != null) {
-//				Duration dur = Duration.between(start, intervals[i]);
-//				long HH = dur.toHoursPart();
-//				long MM = dur.toMinutesPart();
-//				long SS = dur.toSecondsPart();
-//				long MS = dur.toMillisPart();
-//				str += String.format("%02d:%02d:%02d:%02d", HH, MM, SS, MS) + "\n";
 				str = getDurationToString(start, intervals[i]);
 			}
 		}
@@ -147,12 +120,6 @@ public class StopWatch implements Comparable<StopWatch> {
 	public String getDuration() {
 		LocalTime temp;
 		temp = (end == null) ? LocalTime.now() : end;
-//		totalTime = Duration.between(start, temp);
-//		long HH = totalTime.toHours();
-//		long MM = totalTime.toMinutesPart();
-//		long SS = totalTime.toSecondsPart();
-//		long MS = totalTime.toMillisPart();
-//		String timeBetween = String.format("%02d:%02d:%02d:%02d", HH, MM, SS, MS);
 		String timeBetween = getDurationToString(start, temp);
 		temp = null;
 		return timeBetween;
@@ -170,10 +137,10 @@ public class StopWatch implements Comparable<StopWatch> {
 		} else if (latestInterval != null) {
 			if (o.latestInterval != null) {
 				return this.latestInterval.compareTo(o.latestInterval);
-			}else {
+			} else {
 				return 0;
 			}
-			
+
 		} else {
 			return -1;
 		}
@@ -188,6 +155,25 @@ public class StopWatch implements Comparable<StopWatch> {
 			return "Stopwatch [Start: " + start + " - End: " + "00:00:00" + "]";
 		}
 		return "Stopwatch [Start: " + start + " - End: " + end + "]";
+	}
+
+	/**
+	 * 
+	 * Static method takes two LocaTimes, checks duration and returns a formatted
+	 * string.
+	 * 
+	 * @param t1 - LocalTime 1
+	 * @param t2 - LocalTime 2
+	 * @return
+	 */
+
+	public static String getDurationToString(LocalTime t1, LocalTime t2) {
+		Duration dur = Duration.between(t1, t2);
+		long HH = dur.toHoursPart();
+		long MM = dur.toMinutesPart();
+		long SS = dur.toSecondsPart();
+		long MS = dur.toMillisPart();
+		return String.format("%02d:%02d:%02d:%02d", HH, MM, SS, MS);
 	}
 
 }
