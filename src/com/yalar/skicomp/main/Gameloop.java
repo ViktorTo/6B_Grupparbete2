@@ -21,7 +21,6 @@ public class Gameloop {
 	
 	IndStart is1;	// Individual Start
 	Masstart ms1;	// MassStart
-	Sprint spr1;	// Sprint
 	Competition comp;
 	
 	public void intro() {
@@ -37,7 +36,7 @@ public class Gameloop {
 
 		System.out.println("\nIt is a beautiful day for a skiing competition!\n"
 				+ "We got some incredible participants today\n" + "What kind of race would you like to do?\n"
-				+ "1. Individual Race\n" + "2. Mass Start\n" + "3. Sprint Race\n" + "4. Back To Menu");
+				+ "1. Individual Race\n" + "2. Mass Start\n" + "3. Back To Menu");
 
 		int option = SimonLib.intInput();
 		switch (option) {
@@ -52,10 +51,6 @@ public class Gameloop {
 			massRace(participants);
 			break;
 		case 3:
-			System.out.println("Time to start a sprint!");
-			spr1 = new Sprint(8, participants.length, participants);
-			break;
-		case 4:
 			intro();
 		}
 
@@ -96,20 +91,16 @@ public class Gameloop {
 
 			} while (!cont);
 			System.out.println(
-					"Do you wish to:\n1. Go back to Main Menu\n2. New race with same competitors\n3. New race with new competitores\n4. Exit");
+					"Do you wish to:\n1. Go back to Main Menu\n2. New race with new participants\n3. Exit");
 			int choice = SimonLib.intInput();
 			switch (choice) {
 			case 1:
 				start();
 				break;
 			case 2:
-				is1 = new IndStart(8, participants.length, participants);
-				indRace(participants);
-				break;
-			case 3:
 				competition();
 				break;
-			case 4:
+			case 3:
 				System.exit(0);
 				break;
 			}
@@ -154,7 +145,7 @@ public class Gameloop {
 		} while (!cont);
 
 		System.out.println(
-				"Do you wish to:\n1. Go back to Main Menu\n2. New race with same competitors\n3. New race with new competitores\n4. Exit");
+				"Do you wish to:\n1. Go back to Main Menu\n2. New race with new participants\n3. Exit");
 		int choice = SimonLib.intInput();
 
 		switch (choice) {
@@ -162,13 +153,9 @@ public class Gameloop {
 			start();
 			break;
 		case 2:
-			ms1 = new Masstart(8, participants.length, participants);
-			massRace(participants);
-			break;
-		case 3:
 			competition();
 			break;
-		case 4:
+		case 3:
 			System.exit(0);
 			break;
 		default:
@@ -233,7 +220,7 @@ public class Gameloop {
 		} else {
 			System.out.println("Race has already ended!");
 			System.out.println(
-					"Do you wish to:\n1. Go back to Main Menu\n2. New race with new competitors\n3. Exit");
+					"Do you wish to:\n1. Go back to Main Menu\n2. New race with new participants\n3. Exit");
 			int choice = SimonLib.intInput();
 
 			switch (choice) {
