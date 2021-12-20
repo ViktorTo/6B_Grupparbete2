@@ -1,6 +1,6 @@
 package com.yalar.skicomp.stopwatch;
 
-import static org.junit.Assert.assertTrue;
+//import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalTime;
