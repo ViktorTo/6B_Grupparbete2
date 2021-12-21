@@ -23,7 +23,7 @@ public class Gameloop {
 	Masstart ms1;	// MassStart
 	Competition comp;
 	
-	public void intro() {
+	private void intro() {
 		System.out.println("Welcome to YAJava Skiing Competition!\n" + "Your options are as follows:\n\n"
 				+ "1. Start A Competition\n" + "2. View Results\n" + "3. View Competition Log\n" + "4. Exit");
 	}
@@ -73,16 +73,16 @@ public class Gameloop {
 				int input = SimonLib.intInput();
 				switch (input) {
 				case 1:
-					setInterval(participants);
+					LoopLogic.setInterval(participants);
 					break;
 				case 2:
-					checkPlcmnt(participants, is1);
+					LoopLogic.checkPlcmnt(participants, is1);
 					break;
 				case 3:
 					is1.checkField();
 					break;
 				case 4:
-					numOfRacersFinish = finishSkier(participants, numOfRacersFinish);
+					numOfRacersFinish = LoopLogic.finishSkier(participants, numOfRacersFinish);
 					break;
 				case 5:
 					cont = finishRace(participants, numOfRacersFinish, cont, is1);
@@ -123,16 +123,16 @@ public class Gameloop {
 			int input = SimonLib.intInput();
 			switch (input) {
 			case 1:
-				setInterval(participants);
+				LoopLogic.setInterval(participants);
 				break;
 			case 2:
-				checkPlcmnt(participants, ms1);
+				LoopLogic.checkPlcmnt(participants, ms1);
 				break;
 			case 3:
 				ms1.checkField();
 				break;
 			case 4:
-				numOfRacersFinish = finishSkier(participants, numOfRacersFinish);
+				numOfRacersFinish = LoopLogic.finishSkier(participants, numOfRacersFinish);
 				break;
 			case 5:
 				cont = finishRace(participants, numOfRacersFinish, cont, ms1);
@@ -163,31 +163,7 @@ public class Gameloop {
 		}
 	}
 
-	private void checkPlcmnt(Participant[] participants, Competition c1) {
-		printParticipants(participants);
 
-		System.out.println();
-		int checkPartNum = SimonLib.intInput();
-		for (int i = 0; i < participants.length; i++) {
-			if (participants[i].getParticipantNumber() == checkPartNum) {
-				if (participants[i].isFinished()) {
-					System.out.println("This player has already crossed the finish line.");
-					i = participants.length;
-				} else {
-					c1.checkPlacement(checkPartNum);
-				}
-				i = participants.length;
-			}
-		}
-	}
-
-	private void printParticipants(Participant[] participants) {
-		System.out.print("Choose a participant's number: ");
-		for (int i = 0; i < participants.length; i++) {
-			System.out.print(participants[i].getParticipantNumber() + ", ");
-
-		}
-	}
 
 	private boolean finishRace(Participant[] participants, int numOfRacersFinish, boolean cont, Competition c1) {
 		if (c1.getSw().getEnd() == null) {
@@ -238,35 +214,9 @@ public class Gameloop {
 		return cont;
 	}
 
-	private int finishSkier(Participant[] participants, int numOfRacersFinish) {
-		printParticipants(participants);
 
-		System.out.println();
-		int num = SimonLib.intInput();
-		for (int i = 0; i < participants.length; i++) {
-			if (num == participants[i].getParticipantNumber()) {
-				numOfRacersFinish++;
-				participants[i].setFinished(true);
-				participants[i].getStopWatch().endClock();
-				System.out.println(participants[i]);
-			}
-		}
-		return numOfRacersFinish;
-	}
 
-	private void setInterval(Participant[] participants) {
-		printParticipants(participants);
-
-		int num = SimonLib.intInput();
-		for (int i = 0; i < participants.length; i++) {
-			if (num == participants[i].getParticipantNumber()) {
-				participants[i].getStopWatch().setInterval();
-				System.out.println(participants[i]);
-				System.out.println(participants[i].getStopWatch().getLatestInt());
-				i = participants.length;
-			}
-		}
-	}
+	
 
 	public void result() {
 		System.out.println("Available log files:");
