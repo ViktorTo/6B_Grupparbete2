@@ -214,10 +214,11 @@ public class Gameloop {
 		return cont;
 	}
 
-
-
-	
-
+	/**
+	 * Shows the result of a finished game.
+	 * 
+	 * TODO: Implementation!
+	 */
 	public void result() {
 		System.out.println("Available log files:");
 		var list = fileManager.listDirectory("./log");
@@ -238,7 +239,12 @@ public class Gameloop {
 		}
 		System.out.println("File does not exist");
 	}
-
+	
+	/**
+	 * Saves the result of a finished game to a logfile.
+	 * 
+	 * TODO: Implementation!
+	 */
 	public void log() {
 		System.out.println("Enter file name");
 		String path = SimonLib.stringInput();
