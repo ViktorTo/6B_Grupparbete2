@@ -163,8 +163,6 @@ public class Gameloop {
 		}
 	}
 
-
-
 	private boolean finishRace(Participant[] participants, int numOfRacersFinish, boolean cont, Competition c1) {
 		if (c1.getSw().getEnd() == null) {
 			if (c1.isCompDone()) {
