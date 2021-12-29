@@ -52,6 +52,9 @@ public class Gameloop {
 			break;
 		case 3:
 			intro();
+		default:
+			System.out.println("Invalid input.");
+			break;
 		}
 
 	}
@@ -87,21 +90,30 @@ public class Gameloop {
 				case 5:
 					cont = finishRace(participants, numOfRacersFinish, cont, is1);
 					break;
+				default:
+					System.out.println("Invalid input.");
+					break;
 				}
 
 			} while (!cont);
 			System.out.println(
-					"Do you wish to:\n1. Go back to Main Menu\n2. New race with new participants\n3. Exit");
+					"Do you wish to:\n1. Go back to Main Menu\n2. Save race\n3. New race with new participants\n4. Exit");
 			int choice = SimonLib.intInput();
 			switch (choice) {
 			case 1:
 				start();
 				break;
 			case 2:
-				competition();
+				log();
 				break;
 			case 3:
+				competition();
+				break;
+			case 4:
 				System.exit(0);
+				break;
+			default:
+				System.out.println("Invalid input.");
 				break;
 			}
 		}
@@ -138,14 +150,14 @@ public class Gameloop {
 				cont = finishRace(participants, numOfRacersFinish, cont, ms1);
 				break;
 			default:
-				System.out.println("Invalid input, please try again");
+				System.out.println("Invalid input.");
 				break;
 			}
 
 		} while (!cont);
 
 		System.out.println(
-				"Do you wish to:\n1. Go back to Main Menu\n2. New race with new participants\n3. Exit");
+				"Do you wish to:\n1. Go back to Main Menu\n2. Save race\n3. New race with new participants\n4. Exit");
 		int choice = SimonLib.intInput();
 
 		switch (choice) {
@@ -153,9 +165,12 @@ public class Gameloop {
 			start();
 			break;
 		case 2:
-			competition();
+			log();
 			break;
 		case 3:
+			competition();
+			break;
+		case 4:
 			System.exit(0);
 			break;
 		default:
@@ -194,7 +209,7 @@ public class Gameloop {
 		} else {
 			System.out.println("Race has already ended!");
 			System.out.println(
-					"Do you wish to:\n1. Go back to Main Menu\n2. New race with new participants\n3. Exit");
+					"Do you wish to:\n1. Go back to Main Menu\n2. Save race\n3. New race with new participants\n4. Exit");
 			int choice = SimonLib.intInput();
 
 			switch (choice) {
@@ -202,10 +217,16 @@ public class Gameloop {
 				start();
 				break;
 			case 2:
-				competition();
+				log();
 				break;
 			case 3:
+				competition();
+				break;
+			case 4:
 				System.exit(0);
+				break;
+			default:
+				System.out.println("Invalid input.");
 				break;
 			}
 		}
@@ -272,11 +293,11 @@ public class Gameloop {
 				result();
 				break;
 			case 3:
-				log();
-				break;
-			case 4:
 				done = true;
 				break; // EXIT OPTION
+			default:
+				System.out.println("Invalid input.");
+				break;
 			}
 		}
 
