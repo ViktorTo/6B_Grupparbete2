@@ -117,12 +117,22 @@ public class StopWatch implements Comparable<StopWatch> {
 	 * @return
 	 */
 
-	public String getDuration() {
+	public String getDurationToString() {
 		LocalTime temp;
 		temp = (end == null) ? LocalTime.now() : end;
 		String timeBetween = getDurationToString(start, temp);
 		temp = null;
 		return timeBetween;
+	}
+	
+	public Duration getDuration() {
+		if(this.end == null) {
+		Duration dur = Duration.between(start, latestInterval);
+		return dur;
+		}else {
+			Duration dur = Duration.between(start, end);
+			return dur;
+		}
 	}
 
 	/**
@@ -169,11 +179,12 @@ public class StopWatch implements Comparable<StopWatch> {
 
 	public static String getDurationToString(LocalTime t1, LocalTime t2) {
 		Duration dur = Duration.between(t1, t2);
-		long HH = dur.toHoursPart();
-		long MM = dur.toMinutesPart();
-		long SS = dur.toSecondsPart();
-		long MS = dur.toMillisPart();
+		long HH = Math.abs(dur.toHoursPart());
+		long MM = Math.abs(dur.toMinutesPart());
+		long SS = Math.abs(dur.toSecondsPart());
+		long MS = Math.abs(dur.toMillisPart());
 		return String.format("%02d:%02d:%02d:%02d", HH, MM, SS, MS);
 	}
+	
 
 }
