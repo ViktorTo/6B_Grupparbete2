@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.List;
 
 import com.yalar.skicomp.participant.Participant;
+import com.yalar.skicomp.stopwatch.CompareSW;
 import com.yalar.skicomp.stopwatch.StopWatch;
 
 public abstract class Competition {
@@ -56,7 +57,7 @@ public abstract class Competition {
 		List<String> a1 = new ArrayList<>();
 
 		for (Participant s : skiers) {
-			a1.add(s.toString() + " " + s.getStopWatch().getDuration());
+			a1.add(s.toString() + " " + s.getStopWatch().getDurationToString());
 		}
 
 		return a1;
@@ -100,8 +101,9 @@ public abstract class Competition {
 		}
 
 		if (inList) {
+			
 
-			Collections.sort(temp);
+			Collections.sort(temp, new CompareSW());
 
 			for (Participant p : temp) {
 				if (p.getParticipantNumber() == partNum) {
@@ -185,8 +187,8 @@ public abstract class Competition {
 			}
 		}
 
-		Collections.sort(interval);
-		Collections.sort(finished);
+		Collections.sort(interval, new CompareSW());
+		Collections.sort(finished, new CompareSW());
 
 		for (Participant p : finished) {
 			System.out.println(
