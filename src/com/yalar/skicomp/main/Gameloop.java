@@ -1,6 +1,6 @@
 package com.yalar.skicomp.main;
 
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -23,7 +23,7 @@ public class Gameloop {
 	Masstart ms1;	// MassStart
 	Competition comp;
 	
-	public void intro() {
+	private void intro() {
 		System.out.println("Welcome to YAJava Skiing Competition!\n" + "Your options are as follows:\n\n"
 				+ "1. Start A Competition\n" + "2. View Results\n" + "3. View Competition Log\n" + "4. Exit");
 	}
@@ -52,6 +52,9 @@ public class Gameloop {
 			break;
 		case 3:
 			intro();
+		default:
+			System.out.println("Invalid input.");
+			break;
 		}
 
 	}
@@ -73,36 +76,44 @@ public class Gameloop {
 				int input = SimonLib.intInput();
 				switch (input) {
 				case 1:
-					setInterval(participants);
+					LoopLogic.setInterval(participants);
 					break;
 				case 2:
-					checkPlcmnt(participants, is1);
+					LoopLogic.checkPlcmnt(participants, is1);
 					break;
 				case 3:
 					is1.checkField();
 					break;
 				case 4:
-					numOfRacersFinish = finishSkier(participants, numOfRacersFinish);
+					numOfRacersFinish = LoopLogic.finishSkier(participants, numOfRacersFinish);
 					break;
 				case 5:
 					cont = finishRace(participants, numOfRacersFinish, cont, is1);
-					log(is1);
+					break;
+				default:
+					System.out.println("Invalid input.");
 					break;
 				}
 
 			} while (!cont);
 			System.out.println(
-					"Do you wish to:\n1. Go back to Main Menu\n2. New race with new participants\n3. Exit");
+					"Do you wish to:\n1. Go back to Main Menu\n2. Save race\n3. New race with new participants\n4. Exit");
 			int choice = SimonLib.intInput();
 			switch (choice) {
 			case 1:
 				start();
 				break;
 			case 2:
-				competition();
+				log();
 				break;
 			case 3:
+				competition();
+				break;
+			case 4:
 				System.exit(0);
+				break;
+			default:
+				System.out.println("Invalid input.");
 				break;
 			}
 		}
@@ -124,30 +135,29 @@ public class Gameloop {
 			int input = SimonLib.intInput();
 			switch (input) {
 			case 1:
-				setInterval(participants);
+				LoopLogic.setInterval(participants);
 				break;
 			case 2:
-				checkPlcmnt(participants, ms1);
+				LoopLogic.checkPlcmnt(participants, ms1);
 				break;
 			case 3:
 				ms1.checkField();
 				break;
 			case 4:
-				numOfRacersFinish = finishSkier(participants, numOfRacersFinish);
+				numOfRacersFinish = LoopLogic.finishSkier(participants, numOfRacersFinish);
 				break;
 			case 5:
 				cont = finishRace(participants, numOfRacersFinish, cont, ms1);
-				log(ms1);
 				break;
 			default:
-				System.out.println("Invalid input, please try again");
+				System.out.println("Invalid input.");
 				break;
 			}
 
 		} while (!cont);
 
 		System.out.println(
-				"Do you wish to:\n1. Go back to Main Menu\n2. New race with new participants\n3. Exit");
+				"Do you wish to:\n1. Go back to Main Menu\n2. Save race\n3. New race with new participants\n4. Exit");
 		int choice = SimonLib.intInput();
 
 		switch (choice) {
@@ -155,39 +165,16 @@ public class Gameloop {
 			start();
 			break;
 		case 2:
-			competition();
+			log();
 			break;
 		case 3:
+			competition();
+			break;
+		case 4:
 			System.exit(0);
 			break;
 		default:
 			System.out.println("Invalid input.");
-		}
-	}
-
-	private void checkPlcmnt(Participant[] participants, Competition c1) {
-		printParticipants(participants);
-
-		System.out.println();
-		int checkPartNum = SimonLib.intInput();
-		for (int i = 0; i < participants.length; i++) {
-			if (participants[i].getParticipantNumber() == checkPartNum) {
-				if (participants[i].isFinished()) {
-					System.out.println("This player has already crossed the finish line.");
-					i = participants.length;
-				} else {
-					c1.checkPlacement(checkPartNum);
-				}
-				i = participants.length;
-			}
-		}
-	}
-
-	private void printParticipants(Participant[] participants) {
-		System.out.print("Choose a participant's number: ");
-		for (int i = 0; i < participants.length; i++) {
-			System.out.print(participants[i].getParticipantNumber() + ", ");
-
 		}
 	}
 
@@ -222,7 +209,7 @@ public class Gameloop {
 		} else {
 			System.out.println("Race has already ended!");
 			System.out.println(
-					"Do you wish to:\n1. Go back to Main Menu\n2. New race with new participants\n3. Exit");
+					"Do you wish to:\n1. Go back to Main Menu\n2. Save race\n3. New race with new participants\n4. Exit");
 			int choice = SimonLib.intInput();
 
 			switch (choice) {
@@ -230,46 +217,27 @@ public class Gameloop {
 				start();
 				break;
 			case 2:
-				competition();
+				log();
 				break;
 			case 3:
+				competition();
+				break;
+			case 4:
 				System.exit(0);
+				break;
+			default:
+				System.out.println("Invalid input.");
 				break;
 			}
 		}
 		return cont;
 	}
 
-	private int finishSkier(Participant[] participants, int numOfRacersFinish) {
-		printParticipants(participants);
-
-		System.out.println();
-		int num = SimonLib.intInput();
-		for (int i = 0; i < participants.length; i++) {
-			if (num == participants[i].getParticipantNumber()) {
-				numOfRacersFinish++;
-				participants[i].setFinished(true);
-				participants[i].getStopWatch().endClock();
-				System.out.println(participants[i]);
-			}
-		}
-		return numOfRacersFinish;
-	}
-
-	private void setInterval(Participant[] participants) {
-		printParticipants(participants);
-
-		int num = SimonLib.intInput();
-		for (int i = 0; i < participants.length; i++) {
-			if (num == participants[i].getParticipantNumber()) {
-				participants[i].getStopWatch().setInterval();
-				System.out.println(participants[i]);
-				System.out.println(participants[i].getStopWatch().getLatestInt());
-				i = participants.length;
-			}
-		}
-	}
-
+	/**
+	 * Shows the result of a finished game.
+	 *
+	 * TODO: Implementation!
+	 */
 	public void result() {
 		System.out.println("Available log files:");
 		var list = fileManager.listDirectory("./log");
@@ -292,8 +260,8 @@ public class Gameloop {
 	}
 
 	public void log(Competition competition) {
-		Date date = new Date();
-		String path = competition.getTypeSignature() + "-" + date.toString().substring(4, 19);
+		System.out.println("Enter file name");
+		String path = SimonLib.stringInput();
 
 		if(fileManager.saveFile(competition.getArraylist(), "./log/" + path + ".log")) return;
 
@@ -315,6 +283,9 @@ public class Gameloop {
 			case 3:
 				done = true;
 				break; // EXIT OPTION
+			default:
+				System.out.println("Invalid input.");
+				break;
 			}
 		}
 
