@@ -53,6 +53,10 @@ public class Sprint extends Competition {
 		}
 
 	}
-	
 
+
+	@Override
+	public String getTypeSignature() {
+		return "S";
+	}
 }

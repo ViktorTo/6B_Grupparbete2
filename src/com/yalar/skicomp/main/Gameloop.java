@@ -1,6 +1,6 @@
 package com.yalar.skicomp.main;
 
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -86,6 +86,7 @@ public class Gameloop {
 					break;
 				case 5:
 					cont = finishRace(participants, numOfRacersFinish, cont, is1);
+					log(is1);
 					break;
 				}
 
@@ -136,6 +137,7 @@ public class Gameloop {
 				break;
 			case 5:
 				cont = finishRace(participants, numOfRacersFinish, cont, ms1);
+				log(ms1);
 				break;
 			default:
 				System.out.println("Invalid input, please try again");
@@ -289,18 +291,11 @@ public class Gameloop {
 		System.out.println("File does not exist");
 	}
 
-	public void log() {
-		System.out.println("Enter file name");
-		String path = SimonLib.stringInput();
+	public void log(Competition competition) {
+		Date date = new Date();
+		String path = competition.getTypeSignature() + "-" + date.toString().substring(4, 19);
 
-		//for testing only, replace with competition.getArrayList()
-		ArrayList<String> testData = new ArrayList<>();
-		testData.add("line 1");
-		testData.add("line 2");
-		testData.add("line 3");
-
-		//return if file creation was successful
-		if(fileManager.saveFile(testData, "./log/" + path + ".log")) return;
+		if(fileManager.saveFile(competition.getArraylist(), "./log/" + path + ".log")) return;
 
 		System.err.println("An error occurred while creating the log file");
 	}
@@ -318,9 +313,6 @@ public class Gameloop {
 				result();
 				break;
 			case 3:
-				log();
-				break;
-			case 4:
 				done = true;
 				break; // EXIT OPTION
 			}

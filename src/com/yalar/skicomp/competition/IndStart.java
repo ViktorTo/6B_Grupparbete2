@@ -69,4 +69,8 @@ public class IndStart extends Competition {
 
 	}
 
+	@Override
+	public String getTypeSignature() {
+		return "IS";
+	}
 }

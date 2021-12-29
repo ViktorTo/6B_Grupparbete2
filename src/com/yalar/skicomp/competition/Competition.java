@@ -14,6 +14,8 @@ public abstract class Competition {
 	private Participant[] skiers;
 	private StopWatch sw = new StopWatch();
 
+	public abstract String getTypeSignature();
+
 	public Participant[] getSkiers() {
 		return skiers;
 	}
