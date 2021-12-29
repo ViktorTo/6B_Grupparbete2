@@ -54,4 +54,8 @@ public class Masstart extends Competition {
 
 	}
 
+	@Override
+	public String getTypeSignature() {
+		return "MS";
+	}
 }

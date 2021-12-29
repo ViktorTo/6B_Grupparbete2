@@ -104,7 +104,7 @@ public class Gameloop {
 				start();
 				break;
 			case 2:
-				log();
+				log(is1);
 				break;
 			case 3:
 				competition();
@@ -165,7 +165,7 @@ public class Gameloop {
 			start();
 			break;
 		case 2:
-			log();
+			log(ms1);
 			break;
 		case 3:
 			competition();
@@ -217,7 +217,7 @@ public class Gameloop {
 				start();
 				break;
 			case 2:
-				log();
+				log(c1);
 				break;
 			case 3:
 				competition();
@@ -235,7 +235,7 @@ public class Gameloop {
 
 	/**
 	 * Shows the result of a finished game.
-	 * 
+	 *
 	 * TODO: Implementation!
 	 */
 	public void result() {
@@ -258,24 +258,12 @@ public class Gameloop {
 		}
 		System.out.println("File does not exist");
 	}
-	
-	/**
-	 * Saves the result of a finished game to a logfile.
-	 * 
-	 * TODO: Implementation!
-	 */
-	public void log() {
+
+	public void log(Competition competition) {
 		System.out.println("Enter file name");
 		String path = SimonLib.stringInput();
 
-		//for testing only, replace with competition.getArrayList()
-		ArrayList<String> testData = new ArrayList<>();
-		testData.add("line 1");
-		testData.add("line 2");
-		testData.add("line 3");
-
-		//return if file creation was successful
-		if(fileManager.saveFile(testData, "./log/" + path + ".log")) return;
+		if(fileManager.saveFile(competition.getArraylist(), "./log/" + path + ".log")) return;
 
 		System.err.println("An error occurred while creating the log file");
 	}
