@@ -104,7 +104,7 @@ public class Gameloop {
 				start();
 				break;
 			case 2:
-				log();
+				log(is1);
 				break;
 			case 3:
 				competition();
@@ -165,7 +165,7 @@ public class Gameloop {
 			start();
 			break;
 		case 2:
-			log();
+			log(ms1);
 			break;
 		case 3:
 			competition();
@@ -217,7 +217,7 @@ public class Gameloop {
 				start();
 				break;
 			case 2:
-				log();
+				log(c1);
 				break;
 			case 3:
 				competition();
