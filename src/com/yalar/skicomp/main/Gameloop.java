@@ -1,6 +1,7 @@
 package com.yalar.skicomp.main;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -260,8 +261,8 @@ public class Gameloop {
 	}
 
 	public void log(Competition competition) {
-		System.out.println("Enter file name");
-		String path = SimonLib.stringInput();
+		Date date = new Date();
+		String path = competition.getTypeSignature() + "-" + date.toString().substring(4, 19);
 
 		if(fileManager.saveFile(competition.getArraylist(), "./log/" + path + ".log")) return;
 
