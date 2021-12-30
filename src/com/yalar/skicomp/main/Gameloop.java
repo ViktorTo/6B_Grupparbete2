@@ -237,7 +237,6 @@ public class Gameloop {
 	/**
 	 * Shows the result of a finished game.
 	 *
-	 * TODO: Implementation!
 	 */
 	public void result() {
 		System.out.println("Available log files:");
