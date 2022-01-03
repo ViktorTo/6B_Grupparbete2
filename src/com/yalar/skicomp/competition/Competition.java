@@ -1,6 +1,5 @@
 package com.yalar.skicomp.competition;
 
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -85,98 +84,47 @@ public abstract class Competition {
 	 */
 
 	public void checkPlacement(int partNum) {
-		List<Participant> temp = new ArrayList<>();
-		boolean inList = false;
-		int placement = 0;
-		int index = 0;
-		String time1;
-		String time2;
-
-		for (int i = 0; i < skiers.length; i++) {
-
-			if (skiers[i].getStopWatch().getLatestInterval() != null) {
-				temp.add(skiers[i]);
-				inList = (skiers[i].getParticipantNumber() == partNum || inList) ? true : false;
-			}
-		}
-
-		if (inList) {
-			
-
-			Collections.sort(temp, new CompareSW());
-
-			for (Participant p : temp) {
-				if (p.getParticipantNumber() == partNum) {
-					placement = temp.indexOf(p) + 1;
-					index = temp.indexOf(p);
-				}
-			}
+		List<Participant> temp = getAllIntervals();
+		int index = getSkierPos(partNum);
+		int placement = index + 1;
+		String empty = "";
+		if (index != -1) {
+			String time1 = (index != 0)
+					? StopWatch.getDurationToString(temp.get(index).getStopWatch().getLatestInterval(),
+							temp.get(index - 1).getStopWatch().getLatestInterval())
+					: "";
+			String time2 = (index < temp.size() - 1)
+					? StopWatch.getDurationToString(temp.get(index).getStopWatch().getLatestInterval(),
+							temp.get(index + 1).getStopWatch().getLatestInterval())
+					: "";
 
 			if (index == 0) {
-
-				if (temp.size() > 1) {
-
-					String time = StopWatch.getDurationToString(temp.get(index).getStopWatch().getLatestInterval(),
-							temp.get(index + 1).getStopWatch().getLatestInterval());
-
-					System.out.println(temp.get(index).getParticipantNumber() + " " + temp.get(index).getFullName()
-							+ " is in the lead!");
-					System.out.println(temp.get(index + 1).getParticipantNumber() + " "
-							+ temp.get(index + 1).getFullName() + " is in second with " + time + " to first!");
-				} else {
-					System.out.println(temp.get(index).getParticipantNumber() + " " + temp.get(index).getFullName()
-							+ " is in the lead!");
-					System.out.println(
-							"First to reach the checkpoint, Time: " + temp.get(index).getStopWatch().getLatestInt());
+				System.out.println(temp.get(index).getFullName() + " is in the lead");
+				if (!empty.equals(time2)) {
+					System.out.println(temp.get(index + 1).getFullName() + " is in second with " + time2 + " to first");
 				}
-
+			} else if (index > 0 && index < skiers.length - 1) {
+				System.out.println(temp.get(index).getFullName() + " is number " + placement + " in the field");
+				System.out.println(temp.get(index - 1).getFullName() + " is in front with " + time1);
+				if (!empty.equals(time2)) {
+					System.out.println(temp.get(index + 1).getFullName() + " is behind with " + time2);
+				}
 			} else if (index == skiers.length - 1) {
-
-				String time = StopWatch.getDurationToString(temp.get(index).getStopWatch().getLatestInterval(),
-						temp.get(index - 1).getStopWatch().getLatestInterval());
-
-				System.out.println(
-						temp.get(index).getParticipantNumber() + " " + temp.get(index).getFullName() + " is last!");
-				System.out.println(temp.get(index - 1).getParticipantNumber() + " " + temp.get(index - 1).getFullName()
-						+ " is the skier in front, they have " + time + " between the two skiers");
-
-			} else {
-
-				if (temp.size() > 2 && index != temp.size() - 1) {
-
-					time1 = StopWatch.getDurationToString(temp.get(index).getStopWatch().getLatestInterval(),
-							temp.get(index - 1).getStopWatch().getLatestInterval());
-					time2 = StopWatch.getDurationToString(temp.get(index).getStopWatch().getLatestInterval(),
-							temp.get(index + 1).getStopWatch().getLatestInterval());
-
-					System.out.println(
-							temp.get(index).getParticipantNumber() + " " + temp.get(index).getFullName() + " is number "
-									+ placement + " in the field and have " + time1 + " to the skier in front!");
-					System.out.println("The time to the skier behind is " + time2);
-
-				} else {
-
-					time1 = StopWatch.getDurationToString(temp.get(index).getStopWatch().getLatestInterval(),
-							temp.get(index - 1).getStopWatch().getLatestInterval());
-
-					System.out.println(
-							temp.get(index).getParticipantNumber() + " " + temp.get(index).getFullName() + " is number "
-									+ placement + " in the field and have " + time1 + " to the skier in front!");
-					System.out.println("Latest skier to the checkpoint!");
-				}
+				System.out.println(temp.get(index).getFullName() + " is in last");
+				System.out.println(temp.get(index - 1).getFullName() + " is the skier in front with " + time1);
 			}
-
-		} else {
-			System.out.println("Skier has not reached the checkpoint yet!");
 		}
-
 	}
+	
+	/**
+	 * Method checks if skier is finished, have interval or nothing at all.
+	 * After checking and sorting, it prints to console.
+	 */
 
 	public void checkField() {
 
 		List<Participant> interval = new ArrayList<>();
 		List<Participant> finished = new ArrayList<>();
-		boolean end = false;
 
 		for (Participant s : skiers) {
 
@@ -205,11 +153,14 @@ public abstract class Competition {
 			if (!finished.contains(skiers[i]) && !interval.contains(skiers[i])) {
 				System.out.println(skiers[i].getParticipantNumber() + " " + skiers[i].getFullName() + ": NO TIME");
 			}
-
 		}
-
 	}
 
+	/**
+	 * Checks to see if Competition "endclock" is set.
+	 * @return boolean
+	 */
+	
 	public boolean isCompDone() {
 		for (Participant p : skiers) {
 			if (p.getStopWatch().getEnd() == null) {
@@ -225,5 +176,84 @@ public abstract class Competition {
 			return StopWatch.getDurationToString(this.sw.getStart(), this.sw.getEnd());
 		}
 		return "Competition has not ended";
+	}
+	
+	/**
+	 * Check if Participant number is infact a skier in the race.
+	 * @param partNum - Integer partNum
+	 * @return boolean
+	 */
+	
+	public boolean isInComp(int partNum) {
+		for (Participant p : skiers) {
+			if(p.getParticipantNumber() == partNum) {
+				return true;
+			}
+		}
+		System.out.println("No skier in competition with that number!");
+		return false;
+	}
+	
+	/**
+	 * Check if skier have reached the checkpoint.
+	 * @param partNum - Integer partNum
+	 * @return boolean
+	 */
+	
+	public boolean gotIntTime(int partNum) {
+		List<Participant> temp = getAllIntervals();
+		return temp.stream().anyMatch(e -> e.getParticipantNumber() == partNum);
+	}
+	
+	/**
+	 * Method returns the index of inputed skier.
+	 * @param partNum - Integer partNum
+	 * @return Integer
+	 */
+	
+	public int getSkierPos(int partNum) {
+		
+			List<Participant> temp = getAllIntervals();
+			for (Participant p : temp) {
+				if (p.getParticipantNumber() == partNum) {
+					return temp.indexOf(p);
+				}
+			}
+			System.out.println("Skier has not reached a checkpoint yet!");
+			return -1;
+		}
+	
+	/**
+	 * Method returns a list of all skiers with intervals.
+	 * @return List<Participant>
+	 */
+	
+	public List<Participant> getAllIntervals() {
+		List<Participant> temp = new ArrayList<>();
+		
+		for (int i = 0; i < skiers.length; i++) {
+			if (skiers[i].getStopWatch().getLatestInterval() != null) {
+				temp.add(skiers[i]);
+			}
+		}
+		Collections.sort(temp, new CompareSW());
+		return temp;
+	}
+	
+	/**
+	 * Method returns a list of all skiers finished.
+	 * @return List<Participant>
+	 */
+	
+	public List<Participant> getAllFinishes() {
+		List<Participant> temp = new ArrayList<>();
+		
+		for (int i = 0; i < skiers.length; i++) {
+			if (skiers[i].getStopWatch().getEnd() != null) {
+				temp.add(skiers[i]);
+			}
+		}
+		Collections.sort(temp, new CompareSW());
+		return temp;
 	}
 }
