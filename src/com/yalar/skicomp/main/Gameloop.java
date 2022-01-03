@@ -77,7 +77,7 @@ public class Gameloop {
 				int input = SimonLib.intInput();
 				switch (input) {
 				case 1:
-					LoopLogic.setInterval(participants);
+					LoopLogic.setInterval(participants, is1);
 					break;
 				case 2:
 					LoopLogic.checkPlcmnt(participants, is1);
@@ -136,7 +136,7 @@ public class Gameloop {
 			int input = SimonLib.intInput();
 			switch (input) {
 			case 1:
-				LoopLogic.setInterval(participants);
+				LoopLogic.setInterval(participants, ms1);
 				break;
 			case 2:
 				LoopLogic.checkPlcmnt(participants, ms1);
