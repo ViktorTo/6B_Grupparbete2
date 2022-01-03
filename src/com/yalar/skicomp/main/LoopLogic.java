@@ -32,16 +32,18 @@ public class LoopLogic {
 		}
 	}
 	
-	public static void setInterval(Participant[] participants) {
+	public static void setInterval(Participant[] participants, Competition c) {
 		LoopLogic.printParticipants(participants);
 
 		int num = SimonLib.intInput();
-		for (int i = 0; i < participants.length; i++) {
-			if (num == participants[i].getParticipantNumber()) {
-				participants[i].getStopWatch().setInterval();
-				System.out.println(participants[i]);
-				System.out.println(participants[i].getStopWatch().getLatestInt());
-				i = participants.length;
+		if (c.isInComp(num)) {
+			for (int i = 0; i < participants.length; i++) {
+				if (num == participants[i].getParticipantNumber()) {
+					participants[i].getStopWatch().setInterval();
+					System.out.println(participants[i]);
+					System.out.println(participants[i].getStopWatch().getLatestInt());
+					i = participants.length;
+				}
 			}
 		}
 	}
