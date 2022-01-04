@@ -28,6 +28,12 @@ public class Gameloop {
 				+ "1. Start A Competition\n" + "2. View Results\n" + "3. View Competition Log\n" + "4. Exit");
 	}
 
+	
+	/**
+	 * Method that contains the menu of what races to choose from, if the user wishes to either start an individual race (see indRace),
+	 * or mass start (see massRace) 
+	 * @param competition
+	 * */
 	public void competition() {
 		
 		System.out.println("Please enter how many participants you want");
@@ -46,6 +52,11 @@ public class Gameloop {
 	boolean test = true;
 	do {
 		int option = SimonLib.intInput();
+		
+		/**
+		 * Switch case that starts a race, depending if user chose individual start or mass race
+		 * @param option
+		 * */
 		switch (option) {
 		case 1:
 			System.out.println("Time to start an individual start!");
@@ -67,7 +78,13 @@ public class Gameloop {
 
 	}
 
-	// Method for making an individual race.
+	/**
+	 * This method will start an individual race for each participant entered 
+	 * and has the option to enter a custom interval in seconds
+	 * for each participant. 
+	 * When race has started, a menu will appear showing different things the user can choose to do. End race, set interval, check placements
+	 * @param indRace
+	 * */
 	private void indRace(Participant[] participants) {
 		System.out.println("Please enter a time interval for each participant");
 		int setInterval = SimonLib.intInput();
@@ -81,6 +98,11 @@ public class Gameloop {
 			do {
 				System.out.println("What do you want to do?\n1. Set interval\n" + "2. Check Placement\n"
 						+ "3. Check Fields\n" + "4. Skier finished\n" + "5. Finish Race");
+				
+				/**
+				 * Switch case that checks what the user wishes to do during the race's duration.
+				 * @param input
+				 * */
 				int input = SimonLib.intInput();
 				switch (input) {
 				case 1:
@@ -107,6 +129,10 @@ public class Gameloop {
 			System.out.println(
 					"Do you wish to:\n1. Go back to Main Menu\n2. Save race\n3. New race with new participants\n4. Exit");
 			int choice = SimonLib.intInput();
+			/**
+			 * Switch case that checks what the user entered, if they wish to go back to main menu, save race, new race or exit
+			 * @return choice
+			 */
 			switch (choice) {
 			case 1:
 				start();
@@ -128,7 +154,13 @@ public class Gameloop {
 
 	}
 
-	// Method for mass race
+	/**
+	 * This method will start a mass race; where all participants start at the same time
+	 * for all participants entered. 
+	 *When race has started, a menu will appear showing different things the user can choose to do. 
+	 *End race, set interval, check placements
+	 * @param massRace
+	 * */
 	private void massRace(Participant[] participants) {
 		int numOfRacersFinish = 0;
 		ms1.startAllSkiers(participants);
@@ -141,6 +173,10 @@ public class Gameloop {
 			System.out.println("What do you want to do?\n1. Set interval\n" + "2. Check Placement\n"
 					+ "3. Check Fields\n" + "4. Skier finished\n" + "5. Finish Race");
 			int input = SimonLib.intInput();
+			/**
+			 * Switch case that checks what the user wishes to do during the race's duration.
+			 * @param input
+			 * */
 			switch (input) {
 			case 1:
 				LoopLogic.setInterval(participants, ms1);
@@ -167,7 +203,10 @@ public class Gameloop {
 		System.out.println(
 				"Do you wish to:\n1. Go back to Main Menu\n2. Save race\n3. New race with new participants\n4. Exit");
 		int choice = SimonLib.intInput();
-
+		/**
+		 * Switch case that checks what the user entered, if they wish to go back to main menu, save race, new race or exit
+		 * @return choice
+		 */
 		switch (choice) {
 		case 1:
 			start();
@@ -186,6 +225,13 @@ public class Gameloop {
 		}
 	}
 
+	/**
+	 * This method will be called once the user decides to end the race, regardless if all participants have crossed the finish line.
+	 * It will then return the placement of each participant, in the order from fastest time.
+	 * Once results are printed, the user can wish to save the results, see log();
+	 * 
+	 * @param finishRace
+	 * 	 * */
 	private boolean finishRace(Participant[] participants, int numOfRacersFinish, boolean cont, Competition c1) {
 		if (c1.getSw().getEnd() == null) {
 			if (c1.isCompDone()) {
@@ -219,7 +265,11 @@ public class Gameloop {
 			System.out.println(
 					"Do you wish to:\n1. Go back to Main Menu\n2. Save race\n3. New race with new participants\n4. Exit");
 			int choice = SimonLib.intInput();
-
+			/**
+			 * This switch case is for if the user tries to do something; after the race has ended.
+			 * Switch case that checks what the user entered, if they wish to go back to main menu, save race, new race or exit.
+			 * @return choice
+			 */
 			switch (choice) {
 			case 1:
 				start();
