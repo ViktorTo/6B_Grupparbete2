@@ -99,19 +99,19 @@ public abstract class Competition {
 					: "";
 
 			if (index == 0) {
-				System.out.println(temp.get(index).getFullName() + " is in the lead");
+				System.out.println(temp.get(index).getFullName() + " is in the lead \n");
 				if (!empty.equals(time2)) {
-					System.out.println(temp.get(index + 1).getFullName() + " is in second with " + time2 + " to first");
+					System.out.println(temp.get(index + 1).getFullName() + " is in second with " + time2 + " to first \n");
 				}
 			} else if (index > 0 && index < skiers.length - 1) {
-				System.out.println(temp.get(index).getFullName() + " is number " + placement + " in the field");
-				System.out.println(temp.get(index - 1).getFullName() + " is in front with " + time1);
+				System.out.println(temp.get(index).getFullName() + " is number " + placement + " in the field \n");
+				System.out.println(temp.get(index - 1).getFullName() + " is in front with " + time1 + "\n");
 				if (!empty.equals(time2)) {
-					System.out.println(temp.get(index + 1).getFullName() + " is behind with " + time2);
+					System.out.println(temp.get(index + 1).getFullName() + " is behind with " + time2 + "\n");
 				}
 			} else if (index == skiers.length - 1) {
-				System.out.println(temp.get(index).getFullName() + " is in last");
-				System.out.println(temp.get(index - 1).getFullName() + " is the skier in front with " + time1);
+				System.out.println(temp.get(index).getFullName() + " is in last \n");
+				System.out.println(temp.get(index - 1).getFullName() + " is the skier in front with " + time1 + "\n");
 			}
 		}
 	}
@@ -175,7 +175,7 @@ public abstract class Competition {
 		if (sw.getEnd() != null) {
 			return StopWatch.getDurationToString(this.sw.getStart(), this.sw.getEnd());
 		}
-		return "Competition has not ended";
+		return "Competition has not ended \n";
 	}
 	
 	/**
@@ -190,7 +190,7 @@ public abstract class Competition {
 				return true;
 			}
 		}
-		System.out.println("No skier in competition with that number!");
+		System.out.println("No skier in competition with that number! \n");
 		return false;
 	}
 	
@@ -219,7 +219,7 @@ public abstract class Competition {
 					return temp.indexOf(p);
 				}
 			}
-			System.out.println("Skier has not reached a checkpoint yet!");
+			System.out.println("Skier has not reached a checkpoint yet!\n");
 			return -1;
 		}
 	
