@@ -1,6 +1,5 @@
 package com.yalar.skicomp.main;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -30,7 +29,12 @@ public class Gameloop {
 	}
 
 	public void competition() {
-		Participant[] participants = new Participant[4];
+		
+		System.out.println("Please enter how many participants you want");
+		
+		int numOfRacers = SimonLib.intInput();
+		
+		Participant[] participants = new Participant[numOfRacers];
 
 		participants = Participant.setParticipantName(participants);
 		participants = Participant.setParticipantNum(participants);
@@ -39,6 +43,8 @@ public class Gameloop {
 				+ "We got some incredible participants today\n" + "What kind of race would you like to do?\n"
 				+ "1. Individual Race\n" + "2. Mass Start\n" + "3. Back To Menu");
 
+	boolean test = true;
+	do {
 		int option = SimonLib.intInput();
 		switch (option) {
 		case 1:
@@ -57,6 +63,7 @@ public class Gameloop {
 			System.out.println("Invalid input.");
 			break;
 		}
+	} while (test);
 
 	}
 
