@@ -43,23 +43,15 @@ public class Participant extends Person implements Comparable<Participant> {
 		for (int i = 0; i < participants.length; i++) {
 
 			boolean cont = true;
-			// while loop ifall vi beh�ver slumpa ett nytt nummer p� samma plats i arrayen
+			// while loop ifall vi ger varje deltagare ett nummer.
 			while (cont) {
-				nums[i] = (int) (Math.random() * 100);
-
+				nums[i] = nums[i] + 1;
 				cont = false;
-				// For loop får att j�mf�ra de två arrayerna ifall vi hittar ett tal som är
-				// lika.
 				for (int j = 0; j < participants.length; j++) {
-					// om samma nummer inträffar så körs loopen igen.
-
 					if (participants[j].getParticipantNumber() == nums[i]) {
 						j = participants.length;
 						cont = true;
-						// om talet i participants är noll, så avslutas kontrollen.
-					} else if (participants[j].getParticipantNumber() == 0) {
-						j = participants.length;
-					}
+					} 
 				}
 			}
 
@@ -82,8 +74,6 @@ public class Participant extends Person implements Comparable<Participant> {
 			String country = SimonLib.stringInput();
 
 			participants[i] = new Participant(firstName, lastName, country);
-
-
 		}
 		return participants;
 	}
